@@ -1,4 +1,4 @@
-import IngresoTemplate from '../template/IngresoTemplate';
+import IngresoTemplate from '../template/IngresoTemplate.js';
 export default class IngresoView {
     selector;
     selectorName = 'main'; // El contenedor principal para la vista

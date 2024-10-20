@@ -1,6 +1,9 @@
 export default class IndexTemplate {
+    constructor(){
+
+    }
     // Método que retorna el HTML como un string
-    public static getHTML = (): string => {
+    public getHTML = (): string => {
         return `
              <div class="container">
                 <h1>Bienvenidos a Sangre Plus</h1>
