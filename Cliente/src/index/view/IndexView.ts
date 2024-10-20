@@ -3,9 +3,9 @@ import IndexTemplate from "../template/IndexTemplate.js";
 export default class IndexView {
     private selector: HTMLDivElement;
     private selectorName = 'main'; // El ID donde se va a inyectar el contenido
-    private template: typeof IndexTemplate; // Referencia al template
+    private template:  IndexTemplate; // Referencia al template
 
-    constructor(template: typeof IndexTemplate){
+    constructor(template:  IndexTemplate){
         this.selector = document.createElement('div');
         this.template = template;
     }

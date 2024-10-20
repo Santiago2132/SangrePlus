@@ -1,4 +1,4 @@
-import IngresoTemplate from '../template/IngresoTemplate';
+import IngresoTemplate from '../template/IngresoTemplate.js';
 
 export default class IngresoView {
     private selector: HTMLDivElement;

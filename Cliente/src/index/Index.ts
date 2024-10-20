@@ -1,16 +1,14 @@
-import IndexController from './controller/IndexController';
+import IndexController from './controller/IndexController.js';
+import IndexTemplate from './template/IndexTemplate.js';
+import IndexView from './view/IndexView.js';
 
 export default class Index {
-    private indexController: IndexController;
-
-    constructor() {
-        this.indexController = new IndexController(); // Instanciar el controlador
-    }
-
-    // Método para inicializar la aplicación cuando el DOM esté cargado
-    public init = (): void => {
-        document.addEventListener('DOMContentLoaded', () => {
-            this.indexController.init(); // Llamar al método init del controlador
-        });
+    public static create =(): IndexController => {   
+       const controller= new IndexController()
+       controller.init()
+       return controller
+        
     }
 }
+
+

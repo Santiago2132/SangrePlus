@@ -3,7 +3,7 @@ import IndexView from "../view/IndexView.js";
 export default class IndexController {
     indexView;
     constructor() {
-        this.indexView = new IndexView(IndexTemplate); // Se instancia IndexView con IndexTemplate
+        this.indexView = new IndexView(new IndexTemplate()); // Se instancia IndexView con IndexTemplate
     }
     // Método init para inicializar la vista principal
     init = () => {
