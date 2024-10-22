@@ -109,3 +109,97 @@ footer p {
         padding: 2rem;
     }
 }
+/* Contenedor principal */
+.container {
+    text-align: center;
+    background-color: var(--white);
+    padding: 2rem; /* Reduce el padding para hacerlo más compacto */
+    border-radius: 12px; /* Borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* Limita el ancho del formulario */
+    margin: 0 auto;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas para hacerlo más compacto */
+    gap: 1rem; /* Reduce el espacio entre los elementos */
+    background-color: #c2c2c2;
+    padding: 1rem 3rem; /* Padding interno: poco arriba y abajo, mayor a los lados */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+    border-radius: 8px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Para campos que deben ocupar ambas columnas */
+form div.full-width {
+    grid-column: span 2; /* Ocupa ambas columnas */
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.25rem; /* Reduce el margen entre la etiqueta y el input */
+    color: var(--dark-gray);
+}
+
+form input, form textarea, form select {
+    padding: 0.5rem; /* Reduce el padding para hacer los campos más compactos */
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    font-size: 0.95rem; /* Ajusta el tamaño de fuente para hacerlo más compacto */
+    color: var(--dark-gray);
+    background-color: var(--light-gray);
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: var(--main-red);
+    outline: none;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    padding: 0.75rem; /* Botón compacto pero con suficiente espacio */
+    background-color: var(--main-red);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #a93226;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    form {
+        grid-template-columns: 1fr; /* Cambia a una columna en pantallas pequeñas */
+        gap: 0.75rem; /* Reduce un poco más el espacio */
+        padding: 1rem; /* Padding más ligero en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    form input, form textarea, form select {
+        font-size: 0.85rem; /* Fuente más pequeña en pantallas pequeñas */
+        padding: 0.4rem; /* Padding más pequeño */
+    }
+
+    button[type="submit"] {
+        padding: 0.5rem; /* Botón más pequeño en pantallas pequeñas */
+        font-size: 0.85rem;
+    }
+}
+

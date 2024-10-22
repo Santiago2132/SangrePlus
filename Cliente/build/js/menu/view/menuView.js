@@ -7,6 +7,7 @@ export default class menuView {
         this.onAgendarClick(() => this.renderMain('agendar'));
         this.onModificarClick(() => this.renderMain('modificar'));
         this.onCancelarClick(() => this.renderMain('cancelar'));
+        this.renderMain('inicio');
     }
     getButtonById(buttonId) {
         return document.getElementById(buttonId);
@@ -32,7 +33,15 @@ export default class menuView {
             button.addEventListener('click', callback);
     }
     renderMain(component) {
-        // Renderiza el componente principal basado en la selección
-        console.log(component);
+        // Oculta todos los componentes
+        const sections = document.querySelectorAll('main > div, main > nueva, main > cambiar, main > cancelar');
+        sections.forEach((section) => {
+            section.style.display = 'none';
+        });
+        // Muestra solo el componente seleccionado
+        const selectedComponent = document.querySelector(component === 'inicio' ? '#main' : component);
+        if (selectedComponent) {
+            selectedComponent.style.display = 'block';
+        }
     }
 }

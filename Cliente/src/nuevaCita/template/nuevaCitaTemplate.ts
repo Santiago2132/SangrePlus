@@ -2,7 +2,8 @@ export default class NuevaCitaTemplate {
     constructor() {
         console.log('NuevaCitaTemplate constructor');
     }
-    getHTML = () => {
+
+    public getHTML = (): string => {
         return `
             <form id="nueva-cita-form">
                 <div>
@@ -50,5 +51,6 @@ export default class NuevaCitaTemplate {
                 </div>
             </form>
         `;
-    };
+    }
+    
 }

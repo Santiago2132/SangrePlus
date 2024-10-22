@@ -8,6 +8,8 @@ export default class menuView {
         this.onAgendarClick(() => this.renderMain('agendar'));
         this.onModificarClick(() => this.renderMain('modificar'));
         this.onCancelarClick(() => this.renderMain('cancelar'));
+
+        this.renderMain('inicio');
       }
     
       private getButtonById(buttonId: string): HTMLButtonElement | null {
@@ -36,8 +38,17 @@ export default class menuView {
       }
 
       public renderMain(component: string): void {
-        // Renderiza el componente principal basado en la selección
-        console.log(component)
-      }
+        // Oculta todos los componentes
+        const sections = document.querySelectorAll('main > div, main > nueva, main > cambiar, main > cancelar');
+        sections.forEach((section) => {
+            (section as HTMLElement).style.display = 'none';
+        });
+
+        // Muestra solo el componente seleccionado
+        const selectedComponent = document.querySelector(component === 'inicio' ? '#main' : component);
+        if (selectedComponent) {
+            (selectedComponent as HTMLElement).style.display = 'block';
+        }
+    }
     
 }
