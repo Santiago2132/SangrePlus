@@ -2,7 +2,8 @@ export default class CambiarCitaTemplate {
     constructor() {
         console.log('NuevaCitaTemplate constructor');
     }
-    getHTML = () => {
+
+    public getHTML = (): string => {
         return `
             <div class="cambiar-cita">
                 
@@ -60,5 +61,5 @@ export default class CambiarCitaTemplate {
                 </form>
             </div>
         `;
-    };
+    }
 }

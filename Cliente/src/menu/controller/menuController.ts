@@ -1,5 +1,4 @@
 import nuevaController from "../../nuevaCita/controller/nuevaCitaController.js";
-import cancelarController from "../../cambiarCita/controller/cambiarCitaController.js";
 import cambiarController from "../../cambiarCita/controller/cambiarCitaController.js";
 import cancelarCita from "../../cancelarCita/cancelarCita.js";
 import nuevaCita from "../../nuevaCita/nuevaCita.js";
@@ -7,12 +6,13 @@ import cambiarCita from "../../cambiarCita/cambiarCita.js";
 import menuView from "../view/menuView.js";
 import indexController from "../../index/controller/IndexController.js";
 import Index from "../../index/Index.js";
+import cancelarCitaController from "../../cancelarCita/controller/cancelarCitaController.js";
 
 export default class MenuController {
 
 private view: menuView
   private readonly nueva: nuevaController
-  private readonly cancelar: cancelarController
+  private readonly cancelar: cancelarCitaController
   private readonly cambiar: cambiarController
   private readonly index: indexController
 
