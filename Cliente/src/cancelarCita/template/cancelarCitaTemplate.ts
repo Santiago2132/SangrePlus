@@ -2,7 +2,8 @@ export default class CambiarCitaTemplate {
     constructor() {
         console.log('CambiarCitaTemplate constructor');
     }
-    getHTML = () => {
+
+    public getHTML = (): string => {
         return `
             <section id="cancelar-cita-container" class="cita-container">
                 <h2 id="cancelar-cita-title">Cancelar Cita</h2>
@@ -15,5 +16,5 @@ export default class CambiarCitaTemplate {
                 </form>
             </section>
         `;
-    };
+    }
 }

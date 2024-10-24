@@ -1,10 +1,27 @@
+import cancelarCitaTemplate from "../template/cancelarCitaTemplate.js";
+import cancelarCitaView from "../view/cancelarCitaView.js";
 
 export default class cancelarCitaController {
-     constructor(){ 
-    console.log('constructor')
+    private nuevaCitaView: cancelarCitaView
+    constructor(){ 
+        this.nuevaCitaView = new cancelarCitaView(new cancelarCitaTemplate());
+    }
+    public init = (): void => {
+        this.render(); // Llamamos al método render cuando se inicializa el controlador
     }
 
-    public init(){
-        console.log('en contoller cancelar')
+
+
+    // Método para renderizar la vista principal
+    public render = (): void => {
+        // Asegurarse de que el DOM está completamente cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar la vista para que se renderice en el div con el ID 'main'
+            this.nuevaCitaView.init().then(() => {
+                console.log('IndexView initialized and rendered.');
+            }).catch((error) => {
+                console.error('Error initializing IndexView:', error);
+            });
+        });
     }
 }
