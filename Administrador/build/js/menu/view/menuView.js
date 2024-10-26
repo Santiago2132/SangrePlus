@@ -24,17 +24,14 @@ export default class menuView {
     }
     renderMain(component) {
         // Selecciona todos los elementos hijos de main
-        const sections = document.querySelectorAll('main > div');
+        const sections = document.querySelectorAll('main > div, main > ingreso, main > cancelar');
         sections.forEach((section) => {
             section.style.display = 'none';
         });
         // Muestra solo el componente seleccionado
-        const selectedComponent = document.getElementById(component);
+        const selectedComponent = document.querySelector(component === 'ingreso' ? '#main' : component);
         if (selectedComponent) {
             selectedComponent.style.display = 'block';
-        }
-        else {
-            console.error("Elemento no encontrado:", component);
         }
     }
 }
