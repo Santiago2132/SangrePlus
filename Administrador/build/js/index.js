@@ -1,1 +1,2 @@
-"use strict";
+import Menu from "./menu/menu.js";
+Menu.create();
