@@ -9,7 +9,7 @@ export default class menu { constructor(){
         controller.init()
         return controller
 
-     }
+    }
     
 
 
