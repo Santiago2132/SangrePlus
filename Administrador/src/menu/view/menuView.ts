@@ -16,6 +16,7 @@ export default class menuView {
       public onIngresoClick(callback: () => void): void {
         console.log("Se hizo un boton Inicio")
         const button = this.getButtonById('ingreso-btn');
+        console.log(button)
         if (button) button.addEventListener('click', callback);
       }
     
@@ -23,6 +24,7 @@ export default class menuView {
       public onCancelarClick(callback: () => void): void {
         console.log("Se hizo un boton Cancelar")
         const button = this.getButtonById('cerrar-btn');
+        console.log(button)
         if (button) button.addEventListener('click', callback);
       }
     
@@ -30,7 +32,7 @@ export default class menuView {
         // Selecciona todos los elementos hijos de main
         const sections = document.querySelectorAll('main > div, main > ingreso, main > cancelar');
         sections.forEach((section) => {
-            (section as HTMLElement).style.display = 'none';
+            (section as HTMLElement).style.display = '';
         });
     
         // Muestra solo el componente seleccionado

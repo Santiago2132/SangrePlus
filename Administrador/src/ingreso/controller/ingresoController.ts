@@ -17,11 +17,7 @@ export default class IngresoController {
         // Asegurarse de que el DOM está completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
             // Inicializar la vista para que se renderice en el div con el ID 'main'
-            this.ingresoView.init().then(() => {
-                console.log('IndexView initialized and rendered.');
-            }).catch((error) => {
-                console.error('Error initializing IndexView:', error);
-            });
+            this.ingresoView.init()
         });
     }
 }

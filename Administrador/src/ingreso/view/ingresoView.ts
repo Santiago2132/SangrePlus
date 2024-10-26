@@ -2,7 +2,7 @@ import IngresoTemplate from "../template/ingresoTemplate.js";
 
 export default class IngresoView {
     private selector: HTMLDivElement;
-    private selectorName = 'iingreso';
+    private selectorName = 'ingreso';
     private template: IngresoTemplate;
 
     constructor(template : IngresoTemplate){
@@ -10,17 +10,17 @@ export default class IngresoView {
         this.template = template;
     }
 
-    public init = async (): Promise<void> =>{
-        this.selector = document.getElementById(this.selectorName) as HTMLDivElement;
-        setTimeout(() =>{
-            this.render();
-        },100);
+    public init (){
+        this.selector = document.querySelector(this.selectorName) as HTMLDivElement;
+        this.render()
     }
+
     public render = (): void => {
         console.log("se renderizo")
         this.selector.innerHTML = '';
         
-        this.selector.innerHTML = this.template.getHTML();
+        this.selector.innerHTML = `${this.template.getHTML()}`;
 
+        console.log(this.selector + 't')
     }
 }

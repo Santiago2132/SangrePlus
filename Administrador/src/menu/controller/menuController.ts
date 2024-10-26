@@ -13,7 +13,6 @@ export default class MenuController {
 
     public init(): void {
         this.view.init();
-        this.ingreso.init();
 
         // Configura los eventos de los botones al inicializar el menú
         this.view.onIngresoClick(() => this.loadMain('ingreso'));
@@ -28,6 +27,7 @@ export default class MenuController {
         switch (component) {
             case 'ingreso':
                 this.ingreso.init();
+                this.ingreso.render()
                 break;
             case 'cancelar':
                 // Lógica adicional para el componente 'cancelar' si es necesario

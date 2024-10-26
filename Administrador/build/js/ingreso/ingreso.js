@@ -5,7 +5,6 @@ export default class Ingreso {
     }
     static create = () => {
         const controller = new IngresoController();
-        controller.init();
         return controller;
     };
 }
