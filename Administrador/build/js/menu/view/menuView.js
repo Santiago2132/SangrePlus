@@ -2,7 +2,7 @@ export default class MenuView {
     constructor() { }
     init() {
         this.onIngresoClick(() => this.renderMain('ingreso'));
-        this.onCancelarClick(() => this.renderMain('cancelar'));
+        this.onCancelarClick(() => this.renderMain('ingreso'));
         this.renderMain('ingreso');
     }
     getButtonById(buttonId) {
@@ -29,5 +29,13 @@ export default class MenuView {
         if (selectedComponent) {
             selectedComponent.style.display = 'block';
         }
+    }
+    // Renderiza el menú específico del administrador
+    renderAdminMenu() {
+        const adminSection = document.querySelector('#admin-menu');
+        if (adminSection) {
+            adminSection.style.display = 'block';
+        }
+        console.log("Menú de administrador renderizado");
     }
 }

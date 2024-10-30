@@ -330,3 +330,44 @@ button[type="submit"]:hover {
         font-size: 0.85rem; /* Más pequeño en pantallas muy pequeñas */
     }
 }
+
+#idee{
+    display: flex;
+    flex-direction: row;
+}
+
+/*AAA*/
+
+.hidden {
+    display: none;
+}
+
+.info-cita-panel {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.info-cita-panel h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.cancelar-cita-button {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cancelar-cita-button:hover {
+    background-color: #e63946;
+}

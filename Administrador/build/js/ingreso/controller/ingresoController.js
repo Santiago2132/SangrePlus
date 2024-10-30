@@ -1,19 +1,60 @@
+// Importamos las clases necesarias
+import AdminMenuController from "../../adminMenu/controller/adminMenuController.js";
+import { IngresoModel } from "../model/ingresoModel.js";
 import IngresoTemplate from "../template/ingresoTemplate.js";
 import IngresoView from "../view/ingresoView.js";
 export default class IngresoController {
     ingresoView;
+    ingresoModel;
+    usuario = null;
+    adminMenu = null;
     constructor() {
-        this.ingresoView = new IngresoView(new IngresoTemplate);
+        this.ingresoView = new IngresoView(new IngresoTemplate());
+        this.ingresoModel = new IngresoModel();
+        this.adminMenu = new AdminMenuController();
     }
     init = () => {
-        this.render(); // Llamamos al método render cuando se inicializa el controlador
+        this.render();
     };
-    // Método para renderizar la vista principal
     render = () => {
-        // Asegurarse de que el DOM está completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar la vista para que se renderice en el div con el ID 'main'
             this.ingresoView.init();
+            this.attachFormListener();
         });
+    };
+    attachFormListener = () => {
+        const form = document.getElementById('ingreso-form');
+        if (form) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const nombre = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                this.authenticateUser(nombre, password);
+            });
+        }
+    };
+    authenticateUser = (nombre, password) => {
+        const usuario = this.ingresoModel.obtenerUsuario(nombre, password);
+        if (usuario) {
+            this.usuario = usuario; // Guarda el usuario autenticado
+            console.log(`Bienvenido ${usuario.tipo === 'admin' ? 'administrador' : 'agente'}: ${usuario.nombre}`);
+            this.renderUserView(usuario);
+        }
+        else {
+            alert('Credenciales incorrectas. Inténtelo de nuevo.');
+        }
+    };
+    // Método para obtener el usuario autenticado
+    getUsuario() {
+        return this.usuario;
+    }
+    renderUserView = (usuario) => {
+        if (usuario.tipo === 'admin') {
+            console.log('Cargando vista de administrador...');
+            this.adminMenu?.init();
+        }
+        else {
+            console.log('Cargando vista de agente...');
+        }
     };
 }

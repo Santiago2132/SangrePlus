@@ -160,3 +160,73 @@ button[type="submit"]:hover {
     }
 }
 
+/*Admin container*/
+/* Contenedor general */
+.admin-container {
+    display: flex;
+    height: 80vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+/* Barra lateral con botones */
+.admin-sidebar {
+    background-color: #961414;
+    color: white;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.admin-button {
+    background-color: white;
+    color: #961414;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-button:hover {
+    background-color: #b30000;
+    color: white;
+}
+
+/* Contenido principal */
+.admin-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-left: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-button {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .admin-content {
+        padding: 15px;
+    }
+}

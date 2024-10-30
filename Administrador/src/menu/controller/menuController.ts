@@ -1,14 +1,15 @@
+// En MenuController.ts
+import { User } from "../../ingreso/model/ingresoModel.js";
 import IngresoController from "../../ingreso/controller/ingresoController.js";
-import Ingreso from "../../ingreso/ingreso.js";
-import menuView from "../view/menuView.js";
+import MenuView from "../view/menuView.js";
 
 export default class MenuController {
-    private view: menuView;
-    private readonly ingreso: IngresoController;
+    private view: MenuView;
+    private readonly ingresoController: IngresoController;
 
     constructor() {
-        this.view = new menuView();
-        this.ingreso = Ingreso.create();
+        this.view = new MenuView();
+        this.ingresoController = new IngresoController();
     }
 
     public init(): void {
@@ -16,21 +17,28 @@ export default class MenuController {
 
         // Configura los eventos de los botones al inicializar el menú
         this.view.onIngresoClick(() => this.loadMain('ingreso'));
-        this.view.onCancelarClick(() => this.loadMain('cancelar'));
+        this.view.onCancelarClick(() => this.loadMain('ingreso'));
 
-        // Cargar el componente 'ingreso' por defecto
-        this.loadMain('ingreso');
+        // Inicializa IngresoController y obtiene el usuario autenticado
+        this.ingresoController.init();
+        const usuario: User | null = this.ingresoController.getUsuario();
+
+        // Cargar el componente adecuado según el tipo de usuario
+        if (usuario?.tipo === 'admin') {
+            this.view.renderAdminMenu();
+        } else {
+            this.loadMain('ingreso');
+        }
     }
 
     private loadMain(component: string): void {
         this.view.renderMain(component);
         switch (component) {
             case 'ingreso':
-                this.ingreso.init();
-                this.ingreso.render()
+                this.ingresoController.init();
+                this.ingresoController.render();
                 break;
             case 'cancelar':
-                // Lógica adicional para el componente 'cancelar' si es necesario
                 break;
             default:
                 console.error("Componente no encontrado:", component);

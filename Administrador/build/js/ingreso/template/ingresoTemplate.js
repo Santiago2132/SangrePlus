@@ -4,7 +4,7 @@ export default class IngresoTemplate {
     }
     getHTML = () => {
         return `
-            <form id="ingreso-form">
+            <form id="ingreso-form" method="POST">
                 <div class="form-group">
                     <label for="username">Usuario:</label>
                     <input type="text" id="username" name="username" required>
