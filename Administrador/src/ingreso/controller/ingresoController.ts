@@ -56,11 +56,31 @@ export default class IngresoController {
     }
 
     private renderUserView = (usuario: User): void => {
+        const ingresoContainer = document.getElementById(this.ingresoView.selectorName);
+        if (ingresoContainer) ingresoContainer.remove();
+        
         if (usuario.tipo === 'admin') {
+            this.hideAllComponents()
+            this.showComponent("admin")
             console.log('Cargando vista de administrador...');
             this.adminMenu?.init()
         } else {
             console.log('Cargando vista de agente...');
+        }
+    }
+    private hideAllComponents(): void {
+        const components = ['ingreso', 'admin', 'agente'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none'; // Oculta el componente
+            }
+        });
+    }
+    private showComponent(component: string): void {
+        const selectedComponent = document.getElementById(component);
+        if (selectedComponent) {
+            selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
 }

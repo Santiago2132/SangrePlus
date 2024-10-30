@@ -1,4 +1,3 @@
-// En MenuController.ts
 import { User } from "../../ingreso/model/ingresoModel.js";
 import IngresoController from "../../ingreso/controller/ingresoController.js";
 import MenuView from "../view/menuView.js";
@@ -31,17 +30,28 @@ export default class MenuController {
         }
     }
 
-    private loadMain(component: string): void {
-        this.view.renderMain(component);
-        switch (component) {
-            case 'ingreso':
-                this.ingresoController.init();
-                this.ingresoController.render();
-                break;
-            case 'cancelar':
-                break;
-            default:
-                console.error("Componente no encontrado:", component);
+    private loadMain(_component: string): void {
+        // Cargar ingreso y ocultar otros componentes
+        this.hideAllComponents();
+        this.showComponent("ingreso");
+        this.ingresoController.init();
+        this.ingresoController.render();
+    }
+
+    private hideAllComponents(): void {
+        const components = ['ingreso', 'admin', 'agente'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none'; // Oculta el componente
+            }
+        });
+    }
+
+    private showComponent(component: string): void {
+        const selectedComponent = document.getElementById(component);
+        if (selectedComponent) {
+            selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
 }

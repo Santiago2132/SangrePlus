@@ -2,9 +2,7 @@ export default class MenuView {
     constructor() {}
 
     public init(): void {
-        this.onIngresoClick(() => this.renderMain('ingreso'));
-        this.onCancelarClick(() => this.renderMain('ingreso'));
-        this.renderMain('ingreso');
+        this.renderMain('ingreso'); // Siempre muestra la vista de ingreso al iniciar
     }
 
     private getButtonById(buttonId: string): HTMLButtonElement | null {
@@ -23,15 +21,26 @@ export default class MenuView {
 
     public renderMain(component: string): void {
         // Oculta todas las secciones
-        const sections = document.querySelectorAll('main > div, main > ingreso, main > cancelar');
-        sections.forEach((section) => {
-            (section as HTMLElement).style.display = 'none';
-        });
+        this.hideAllComponents();
 
         // Muestra solo el componente seleccionado
-        const selectedComponent = document.querySelector(`#${component}`);
+        this.showComponent(component);
+    }
+
+    private hideAllComponents(): void {
+        const components = ['ingreso', 'admin', 'agente'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none'; // Oculta el componente
+            }
+        });
+    }
+
+    private showComponent(component: string): void {
+        const selectedComponent = document.getElementById(component);
         if (selectedComponent) {
-            (selectedComponent as HTMLElement).style.display = 'block';
+            selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
 

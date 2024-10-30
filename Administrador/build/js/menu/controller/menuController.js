@@ -23,17 +23,26 @@ export default class MenuController {
             this.loadMain('ingreso');
         }
     }
-    loadMain(component) {
-        this.view.renderMain(component);
-        switch (component) {
-            case 'ingreso':
-                this.ingresoController.init();
-                this.ingresoController.render();
-                break;
-            case 'cancelar':
-                break;
-            default:
-                console.error("Componente no encontrado:", component);
+    loadMain(_component) {
+        // Cargar ingreso y ocultar otros componentes
+        this.hideAllComponents();
+        this.showComponent("ingreso");
+        this.ingresoController.init();
+        this.ingresoController.render();
+    }
+    hideAllComponents() {
+        const components = ['ingreso', 'admin', 'agente'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none'; // Oculta el componente
+            }
+        });
+    }
+    showComponent(component) {
+        const selectedComponent = document.getElementById(component);
+        if (selectedComponent) {
+            selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
 }

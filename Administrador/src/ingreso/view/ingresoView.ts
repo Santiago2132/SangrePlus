@@ -2,7 +2,7 @@ import IngresoTemplate from "../template/ingresoTemplate.js";
 
 export default class IngresoView {
     private selector: HTMLDivElement;
-    private selectorName = 'ingreso';
+    public selectorName = 'ingreso';
     private template: IngresoTemplate;
 
     constructor(template: IngresoTemplate) {

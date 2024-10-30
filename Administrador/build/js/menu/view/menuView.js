@@ -1,9 +1,7 @@
 export default class MenuView {
     constructor() { }
     init() {
-        this.onIngresoClick(() => this.renderMain('ingreso'));
-        this.onCancelarClick(() => this.renderMain('ingreso'));
-        this.renderMain('ingreso');
+        this.renderMain('ingreso'); // Siempre muestra la vista de ingreso al iniciar
     }
     getButtonById(buttonId) {
         return document.getElementById(buttonId);
@@ -20,14 +18,23 @@ export default class MenuView {
     }
     renderMain(component) {
         // Oculta todas las secciones
-        const sections = document.querySelectorAll('main > div, main > ingreso, main > cancelar');
-        sections.forEach((section) => {
-            section.style.display = 'none';
-        });
+        this.hideAllComponents();
         // Muestra solo el componente seleccionado
-        const selectedComponent = document.querySelector(`#${component}`);
+        this.showComponent(component);
+    }
+    hideAllComponents() {
+        const components = ['ingreso', 'admin', 'agente'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none'; // Oculta el componente
+            }
+        });
+    }
+    showComponent(component) {
+        const selectedComponent = document.getElementById(component);
         if (selectedComponent) {
-            selectedComponent.style.display = 'block';
+            selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
     // Renderiza el menú específico del administrador

@@ -6,6 +6,7 @@ export default class AdminMenuController {
         this.adminMenuView = new AdminMenuView(new AdminMenuTemplate());
     }
     init() {
+        console.log("AdminMenuController");
         this.adminMenuView.init();
         this.render();
     }
