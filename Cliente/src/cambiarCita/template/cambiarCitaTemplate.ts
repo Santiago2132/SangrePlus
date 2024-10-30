@@ -44,10 +44,6 @@ export default class CambiarCitaTemplate {
                         <input type="text" id="identificacion" name="identificacion" required>
                     </div>
                 </div>
-                <div>
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required>
-                </div>
                 <div class="full-width">
                     <label for="descripcion">Descripción de la cita:</label>
                     <textarea id="descripcion" name="descripcion" required></textarea>
