@@ -1,0 +1,6 @@
+[
+    { "id": 1, "titulo": "Turno 1", "descripcion": "Información del turno 1" },
+    { "id": 2, "titulo": "Turno 2", "descripcion": "Información del turno 2" },
+    { "id": 3, "titulo": "Turno 3", "descripcion": "Información del turno 3" },
+    { "id": 4, "titulo": "Turno 4", "descripcion": "Información del turno 4" }
+]
