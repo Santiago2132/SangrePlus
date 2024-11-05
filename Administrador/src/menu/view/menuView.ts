@@ -3,6 +3,7 @@ export default class MenuView {
 
     public init(): void {
         this.renderMain('ingreso'); // Siempre muestra la vista de ingreso al iniciar
+        
     }
 
     private getButtonById(buttonId: string): HTMLButtonElement | null {
@@ -20,6 +21,7 @@ export default class MenuView {
     }
 
     public renderMain(component: string): void {
+        
         // Oculta todas las secciones
         this.hideAllComponents();
 
@@ -44,12 +46,4 @@ export default class MenuView {
         }
     }
 
-    // Renderiza el menú específico del administrador
-    public renderAdminMenu(): void {
-        const adminSection = document.querySelector('#admin-menu');
-        if (adminSection) {
-            (adminSection as HTMLElement).style.display = 'block';
-        }
-        console.log("Menú de administrador renderizado");
-    }
 }

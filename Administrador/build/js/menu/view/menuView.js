@@ -37,12 +37,4 @@ export default class MenuView {
             selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
-    // Renderiza el menú específico del administrador
-    renderAdminMenu() {
-        const adminSection = document.querySelector('#admin-menu');
-        if (adminSection) {
-            adminSection.style.display = 'block';
-        }
-        console.log("Menú de administrador renderizado");
-    }
 }

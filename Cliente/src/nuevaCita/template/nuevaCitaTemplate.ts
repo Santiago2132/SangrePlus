@@ -40,9 +40,8 @@ export default class NuevaCitaTemplate {
                 <div>
                     <label for="tipo-cita">Tipo de cita:</label>
                     <select id="tipo-cita" name="tipo-cita" required>
-                        <option value="consulta">Consulta</option>
+                        <option value="examen">Examen</option>
                         <option value="seguimiento">Seguimiento</option>
-                        <option value="emergencia">Emergencia</option>
                     </select>
                 </div>
                 <div>

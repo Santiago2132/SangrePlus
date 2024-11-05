@@ -1,4 +1,3 @@
-import { User } from "../../ingreso/model/ingresoModel.js";
 import IngresoController from "../../ingreso/controller/ingresoController.js";
 import MenuView from "../view/menuView.js";
 
@@ -20,22 +19,29 @@ export default class MenuController {
 
         // Inicializa IngresoController y obtiene el usuario autenticado
         this.ingresoController.init();
-        const usuario: User | null = this.ingresoController.getUsuario();
 
-        // Cargar el componente adecuado según el tipo de usuario
-        if (usuario?.tipo === 'admin') {
-            this.view.renderAdminMenu();
-        } else {
-            this.loadMain('ingreso');
-        }
     }
 
     private loadMain(_component: string): void {
+        // Limpiar el contenido de todos los componentes
+        this.clearAllComponents();
+
         // Cargar ingreso y ocultar otros componentes
         this.hideAllComponents();
         this.showComponent("ingreso");
         this.ingresoController.init();
         this.ingresoController.render();
+    }
+
+    private clearAllComponents(): void {
+        // Borra el contenido de cada componente
+        const components = ['ingreso', 'admin', 'agente', 'nueva'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.innerHTML = ''; // Limpia el contenido
+            }
+        });
     }
 
     private hideAllComponents(): void {

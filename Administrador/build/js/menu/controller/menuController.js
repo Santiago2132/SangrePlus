@@ -14,21 +14,25 @@ export default class MenuController {
         this.view.onCancelarClick(() => this.loadMain('ingreso'));
         // Inicializa IngresoController y obtiene el usuario autenticado
         this.ingresoController.init();
-        const usuario = this.ingresoController.getUsuario();
-        // Cargar el componente adecuado según el tipo de usuario
-        if (usuario?.tipo === 'admin') {
-            this.view.renderAdminMenu();
-        }
-        else {
-            this.loadMain('ingreso');
-        }
     }
     loadMain(_component) {
+        // Limpiar el contenido de todos los componentes
+        this.clearAllComponents();
         // Cargar ingreso y ocultar otros componentes
         this.hideAllComponents();
         this.showComponent("ingreso");
         this.ingresoController.init();
         this.ingresoController.render();
+    }
+    clearAllComponents() {
+        // Borra el contenido de cada componente
+        const components = ['ingreso', 'admin', 'agente', 'nueva'];
+        components.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.innerHTML = ''; // Limpia el contenido
+            }
+        });
     }
     hideAllComponents() {
         const components = ['ingreso', 'admin', 'agente'];

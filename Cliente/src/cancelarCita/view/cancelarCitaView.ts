@@ -2,40 +2,41 @@ import cancelarCitaTemplate from "../template/cancelarCitaTemplate.js";
 
 export default class cancelarCitaView {
     private selector: HTMLDivElement;
-    private selectorName = 'cancelar';
+    private selectorName = 'cancelar'; // Asegúrate que este ID exista en tu HTML
     private template: cancelarCitaTemplate;
 
-    constructor(template : cancelarCitaTemplate){
-        this.selector = document.createElement('div');
+    constructor(template: cancelarCitaTemplate) {
+        this.selector = document.createElement("div");
         this.template = template;
     }
 
     public init = async (): Promise<void> => {
         this.selector = document.getElementById(this.selectorName) as HTMLDivElement;
-        setTimeout(() => {
-            this.render();
-            this.addEventListeners();
-        }, 100);
+        if (this.selector) {
+            this.render(); // Renderiza al inicializar
+        } else {
+            console.error(`Element with id "${this.selectorName}" not found.`);
+        }
     }
 
     public render = (): void => {
-        // Limpiar cualquier contenido previo
-        this.selector.innerHTML = '';
-
-        // Inyectar el HTML generado por el template directamente en el selector
         this.selector.innerHTML = this.template.getHTML();
     }
 
-    // Agregar los eventos necesarios
-    private addEventListeners = (): void => {
-        const buscarCitaButton = document.getElementById("buscar-cita");
+    public showInfoPanel = (content: string): void => {
         const infoCitaPanel = document.getElementById("info-cita-panel");
+        if (infoCitaPanel) {
+            infoCitaPanel.innerHTML = content;
+            infoCitaPanel.classList.remove("hidden");
+        } else {
+            console.error('Info panel not found.');
+        }
+    }
 
-        if (buscarCitaButton && infoCitaPanel) {
-            buscarCitaButton.addEventListener("click", () => {
-                // Mostrar el panel de información de la cita
-                infoCitaPanel.classList.remove("hidden");
-            });
+    public hideInfoPanel = (): void => {
+        const infoCitaPanel = document.getElementById("info-cita-panel");
+        if (infoCitaPanel) {
+            infoCitaPanel.classList.add("hidden");
         }
     }
 }

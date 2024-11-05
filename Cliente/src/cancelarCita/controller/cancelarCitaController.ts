@@ -1,10 +1,13 @@
-import cancelarCitaTemplate from "../template/cancelarCitaTemplate.js";
 import cancelarCitaView from "../view/cancelarCitaView.js";
+import cancelarCitaModel from "../model/cancelarCitaModel.js";
+import cancelarCitaTemplate from "../template/cancelarCitaTemplate.js";
 
 export default class cancelarCitaController {
     private cancelarCitaView: cancelarCitaView;
+    private cancelarCitaModel: cancelarCitaModel;
 
-    constructor(){ 
+    constructor() {
+        this.cancelarCitaModel = new cancelarCitaModel();
         this.cancelarCitaView = new cancelarCitaView(new cancelarCitaTemplate());
     }
 
@@ -18,52 +21,55 @@ export default class cancelarCitaController {
         });
     }
 
-    // Método para agregar los eventos al iniciar el controlador
     private addEventListeners = (): void => {
         const buscarCitaButton = document.getElementById("buscar-cita");
+
+        if (buscarCitaButton) {
+            buscarCitaButton.addEventListener("click", this.handleBuscarCita);
+        } else {
+            console.error("El botón 'Buscar Cita' no se encontró.");
+        }
+    }
+
+    private handleBuscarCita = (): void => {
+        const numeroCita = (document.getElementById("numero-cita") as HTMLInputElement).value.trim();
+        const cita = this.cancelarCitaModel.buscarCita(numeroCita);
+
+        if (cita) {
+            this.cancelarCitaView.showInfoPanel(`
+                <h3>Información de la Cita</h3>
+                <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                <p><strong>Hora:</strong> ${cita.hora}</p>
+                <p><strong>Lugar:</strong> ${cita.lugar}</p>
+                <button id="cancelar-cita-button" class="cancelar-cita-button">Cancelar Cita</button>
+            `);
+            this.addEventListenersToCancelButton(); // Asignar evento al botón de cancelar
+        } else {
+            alert("No existe una cita con ese número.");
+        }
+    }
+
+    private addEventListenersToCancelButton = (): void => {
         const cancelarCitaButton = document.getElementById("cancelar-cita-button");
 
-        // Evento para buscar cita y mostrar panel
-        buscarCitaButton?.addEventListener("click", this.handleBuscarCita);
-
-        // Evento para cancelar la cita
-        cancelarCitaButton?.addEventListener("click", this.handleCancelarCita);
-    }
-
-    // Lógica para mostrar el panel de información de la cita al buscar
-    private handleBuscarCita = (): void => {
-        const numeroCita = (document.getElementById("numero-cita") as HTMLInputElement).value;
-        const infoCitaPanel = document.getElementById("info-cita-panel");
-
-        // Validar que se haya ingresado un número de cita
-        if (!numeroCita) {
-            alert("Por favor, ingresa un número de cita válido.");
-            return;
+        if (cancelarCitaButton) {
+            cancelarCitaButton.addEventListener("click", this.handleCancelarCita);
+        } else {
+            console.error("El botón 'Cancelar Cita' no se encontró.");
         }
-
-        // Mostrar el panel de información con datos ficticios
-        infoCitaPanel?.classList.remove("hidden");
-
-        // Aquí puedes realizar una búsqueda real de la cita usando `numeroCita`
-        console.log(`Buscando cita con número: ${numeroCita}`);
     }
 
-    // Lógica para cancelar la cita
     private handleCancelarCita = (): void => {
-        const numeroCita = (document.getElementById("numero-cita") as HTMLInputElement).value;
+        console.log("Intentando cancelar la cita..."); // Para verificar si se llama a la función
+        const numeroCita = (document.getElementById("numero-cita") as HTMLInputElement).value.trim();
+        const citaCancelada = this.cancelarCitaModel.cancelarCita(numeroCita);
 
-        // Confirmar la cancelación
-        const confirmar = confirm(`¿Estás seguro de que deseas cancelar la cita #${numeroCita}?`);
-        if (confirmar) {
-            // Aquí puedes agregar la lógica para cancelar la cita en tu base de datos o backend
-            console.log(`Cita con número ${numeroCita} ha sido cancelada.`);
-
-            // Ocultar el panel de información después de cancelar
-            const infoCitaPanel = document.getElementById("info-cita-panel");
-            infoCitaPanel?.classList.add("hidden");
-
-            // Limpiar el campo de número de cita
+        if (citaCancelada) {
+            this.cancelarCitaView.showInfoPanel("<p>La cita ha sido cancelada con éxito.</p>");
+            // Reiniciar el campo de entrada
             (document.getElementById("numero-cita") as HTMLInputElement).value = '';
+        } else {
+            alert("No se pudo cancelar la cita. Verifica el número de cita.");
         }
     }
 }

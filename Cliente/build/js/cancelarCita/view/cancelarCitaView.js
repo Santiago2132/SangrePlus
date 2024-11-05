@@ -1,33 +1,37 @@
 export default class cancelarCitaView {
     selector;
-    selectorName = 'cancelar';
+    selectorName = 'cancelar'; // Asegúrate que este ID exista en tu HTML
     template;
     constructor(template) {
-        this.selector = document.createElement('div');
+        this.selector = document.createElement("div");
         this.template = template;
     }
     init = async () => {
         this.selector = document.getElementById(this.selectorName);
-        setTimeout(() => {
-            this.render();
-            this.addEventListeners();
-        }, 100);
+        if (this.selector) {
+            this.render(); // Renderiza al inicializar
+        }
+        else {
+            console.error(`Element with id "${this.selectorName}" not found.`);
+        }
     };
     render = () => {
-        // Limpiar cualquier contenido previo
-        this.selector.innerHTML = '';
-        // Inyectar el HTML generado por el template directamente en el selector
         this.selector.innerHTML = this.template.getHTML();
     };
-    // Agregar los eventos necesarios
-    addEventListeners = () => {
-        const buscarCitaButton = document.getElementById("buscar-cita");
+    showInfoPanel = (content) => {
         const infoCitaPanel = document.getElementById("info-cita-panel");
-        if (buscarCitaButton && infoCitaPanel) {
-            buscarCitaButton.addEventListener("click", () => {
-                // Mostrar el panel de información de la cita
-                infoCitaPanel.classList.remove("hidden");
-            });
+        if (infoCitaPanel) {
+            infoCitaPanel.innerHTML = content;
+            infoCitaPanel.classList.remove("hidden");
+        }
+        else {
+            console.error('Info panel not found.');
+        }
+    };
+    hideInfoPanel = () => {
+        const infoCitaPanel = document.getElementById("info-cita-panel");
+        if (infoCitaPanel) {
+            infoCitaPanel.classList.add("hidden");
         }
     };
 }
