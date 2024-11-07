@@ -10,6 +10,8 @@ export default class CitaUseCase implements CitaUseCasePort {
   ) {
     
   }
+
+  
   getCitaById: (id: number) => Promise<Cita>;
   agregarCita: (cita: Cita) => Promise<Cita>;
   eliminarCita: (id: number) => Promise<void>;
