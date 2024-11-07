@@ -7,6 +7,21 @@ export default class CitaControllerExpress
   implements CitaControllerExpressPort
 {
   constructor(/*private readonly movieUseCase: MovieUseCasePort*/) {}
+  obtenercitas(req: Request, res: Response): void {
+    throw new Error('Method not implemented.')
+  }
+  agregarCita(req: Request, res: Response): void {
+    throw new Error('Method not implemented.')
+  }
+  eliminarCita(req: Request, res: Response): void {
+    throw new Error('Method not implemented.')
+  }
+  modificarCita(req: Request, res: Response): void {
+    throw new Error('Method not implemented.')
+  }
+  obtenerCitaId(req: Request, res: Response): void {
+    throw new Error('Method not implemented.')
+  }
     citas(req: Request, res: Response): void {
         throw new Error('Method not implemented.')
     }
