@@ -34,6 +34,6 @@ CREATE TABLE cita (
     hora TIME NOT NULL,
     descripcion TEXT NOT NULL,
     lugar VARCHAR(255) NOT NULL,
-    estado VARCHAR(255) CHECK (estado IN ('pendiente', 'atendida', 'cancelada')) NOT NULL,
+    estado VARCHAR(255) CHECK (estado IN ('pendiente', 'asistida', 'cancelada')) NOT NULL,
     observaciones TEXT
 );

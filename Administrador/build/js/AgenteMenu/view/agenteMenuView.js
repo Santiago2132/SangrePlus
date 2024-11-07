@@ -2,9 +2,11 @@ export default class AgenteMenuView {
     selector;
     selectorName = 'agente';
     template;
-    constructor(template) {
+    onOrdenChange; // Callback para notificar cambios de orden
+    constructor(template, onOrdenChange) {
         this.selector = document.createElement('div');
         this.template = template;
+        this.onOrdenChange = onOrdenChange;
     }
     init() {
         this.selector = document.getElementById(this.selectorName);
@@ -14,13 +16,10 @@ export default class AgenteMenuView {
         }
     }
     render = (turnosConCitas) => {
-        console.log("Renderizando vista con datos de turnos y citas");
         const tbody = document.getElementById('turnos-tbody');
         if (!tbody)
             return;
-        // Limpiar el tbody antes de agregar nuevas filas
-        tbody.innerHTML = '';
-        // Generar las filas de la tabla con los datos dinámicos
+        tbody.innerHTML = ''; // Limpiar el tbody antes de agregar nuevas filas
         let tableRows = turnosConCitas.map((turno, index) => `
             <tr>
                 <td>${turno.numero}</td>
@@ -36,9 +35,7 @@ export default class AgenteMenuView {
                 </td>
             </tr>
         `).join("");
-        // Insertar las filas generadas en el tbody
         tbody.innerHTML = tableRows;
-        // Agregar los event listeners para los botones "subir" y "bajar"
         this.addButtonEventListeners(turnosConCitas);
     };
     addButtonEventListeners = (turnosConCitas) => {
@@ -49,7 +46,8 @@ export default class AgenteMenuView {
                 const index = parseInt(event.target.getAttribute('data-index'));
                 if (index > 0) {
                     this.swapTurno(turnosConCitas, index, index - 1);
-                    this.render(turnosConCitas); // Volver a renderizar la vista después de hacer el cambio
+                    this.onOrdenChange(turnosConCitas); // Notificar al controlador del cambio de orden
+                    this.render(turnosConCitas); // Volver a renderizar
                 }
             });
         });
@@ -58,12 +56,12 @@ export default class AgenteMenuView {
                 const index = parseInt(event.target.getAttribute('data-index'));
                 if (index < turnosConCitas.length - 1) {
                     this.swapTurno(turnosConCitas, index, index + 1);
-                    this.render(turnosConCitas); // Volver a renderizar la vista después de hacer el cambio
+                    this.onOrdenChange(turnosConCitas); // Notificar al controlador del cambio de orden
+                    this.render(turnosConCitas); // Volver a renderizar
                 }
             });
         });
     };
-    // Método para intercambiar dos turnos en el arreglo
     swapTurno = (turnosConCitas, indexA, indexB) => {
         const temp = turnosConCitas[indexA];
         turnosConCitas[indexA] = turnosConCitas[indexB];

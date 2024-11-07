@@ -5,6 +5,7 @@ export default class AdminMenuTemplate {
 
     public getHTML = (): string => {
         return `
+            <p>Bienvenido al área de administración. Selecciona una opción del menú para comenzar.</p>
             <div class="admin-container">
                 <div class="admin-sidebar">
                     <button class="admin-button">Citas Asistidas</button>
@@ -12,7 +13,8 @@ export default class AdminMenuTemplate {
                     <button class="admin-button">Configuración</button>
                 </div>
                 <div class="admin-content">
-                    <p>Bienvenido al área de administración. Selecciona una opción del menú para comenzar.</p>
+                    <asistidas id="asistidas"></asistidas>
+                    <nasistidas id="nasistidas"></nasistidas>
                 </div>
             </div>
         `;

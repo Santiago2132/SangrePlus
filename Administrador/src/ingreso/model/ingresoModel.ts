@@ -19,12 +19,12 @@ export class IngresoModel {
         this.usuarios = [
             {
                 "nombre": "admin_user",
-                "password": "admin123",
+                "password": "123",
                 "tipo": "admin"
             },
             {
                 "nombre": "agent_user",
-                "password": "agent456",
+                "password": "123",
                 "tipo": "agent"
             }
         ];
