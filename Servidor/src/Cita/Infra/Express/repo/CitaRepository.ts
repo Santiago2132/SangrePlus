@@ -1,4 +1,4 @@
-import DBCita from "../../../Domain/Port/CitaDatabasePort";
+import DBCita from "../../../Domain/Port/DB/DBCitaPort";
 import CitaRepositoryPort from "../../../Domain/Port/Driven/CitaRepositoryPort";
 
 export default class CitaRepository implements CitaRepositoryPort{
@@ -6,7 +6,7 @@ export default class CitaRepository implements CitaRepositoryPort{
     constructor(){
 
     }
-    
+
     findAll: () => Promise<DBCita[]>;
     findById: (id: string) => Promise<DBCita>;
     save: (item: DBCita) => Promise<DBCita>;

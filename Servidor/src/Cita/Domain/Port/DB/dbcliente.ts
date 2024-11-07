@@ -1,4 +1,4 @@
-export default interface DBCliente {
+export default interface DBClientePort {
     id: number;
     nombre: string;
     apellido: string;

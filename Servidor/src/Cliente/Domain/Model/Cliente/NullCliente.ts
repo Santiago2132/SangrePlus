@@ -1,39 +1,46 @@
 import Cliente from "./Cliente";
 
 export default class NullCliente extends Cliente {
+    
     constructor() {
+        // Llamamos al constructor de la clase base con valores por defecto
         super({
             id: 0,
-            nombre: "No Disponible",
-            apellido: "No Disponible",
-            tipo: "no premium",
+            nombre: 'No Disponible',
+            apellido: 'No Disponible',
+            edad: 0,
             historial: 0,
-            edad: 0
+            tipo: ''
         });
     }
 
-    public isNull(): boolean {
-        return true; // Método para verificar si es un cliente nulo
+    // Método para verificar si es un cliente nulo
+    public override isNull(): boolean {
+        return true;
     }
 
-    // Sobreescribimos los métodos "get"
-    getid(): number { return this.id; }
-    getnombre(): string { return this.nombre; }
-    getapellido(): string { return this.apellido; }
-    getTipo(): "premium" | "no premium" { return this.tipo; }
-    getHistorial(): number { return this.historial; }
-    getEdad(): number { return this.edad; }
+    // Sobreescribimos los métodos "set" para no hacer nada
+    setId(value: number): void {
+        // No hace nada, ya que es un cliente nulo
+    }
 
-    // Sobreescribimos los métodos "set"
-    setId(value: number): void {}
-    setNombre(value: string): void {}
-    setApellido(value: string): void {}
-    setTipo(value: "premium" | "no premium"): void {}
-    setHistorial(value: number): void {}
-    setEdad(value: number): void {}
+    setNombre(value: string): void {
+        // No hace nada, ya que es un cliente nulo
+    }
 
-    // Sobreescribimos el método calcularDescuento
-    calcularDescuento(): number {
-        return 0; // No hay descuento para el cliente nulo
+    setApellido(value: string): void {
+        // No hace nada, ya que es un cliente nulo
+    }
+
+    setTipo(value: string): void {
+        // No hace nada, ya que es un cliente nulo
+    }
+
+    setHistorial(value: number): void {
+        // No hace nada, ya que es un cliente nulo
+    }
+
+    setEdad(value: number): void {
+        // No hace nada, ya que es un cliente nulo
     }
 }

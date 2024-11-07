@@ -1,7 +1,7 @@
 import Cliente from "../../../../Cliente/Domain/Model/Cliente/Cliente";
 import Turno from "../../../../Turno/Domain/Model/Turno/Turno";
 
-export default interface CitaInterface {
+export interface CitaInterface {
     id: number;
     tipocita: string;
     fecha: Date;
@@ -13,7 +13,8 @@ export default interface CitaInterface {
     observaciones: string;
 }
 
-export default class Cita implements CitaInterface {
+export default class Cita   {
+
     id: number;
     tipocita: string;
     fecha: Date;

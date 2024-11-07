@@ -1,17 +1,18 @@
-export default interface ClienteInterface {
+export interface ClienteInterface {
     id: number;
     nombre: string;
     apellido: string;
-    tipo: "premium" | "no premium";
+    tipo: 'premium' | 'no premium' | '';
     historial: number;
     edad: number;
 }
 
-export default class Cliente implements ClienteInterface {
+
+export default class Cliente  {
     id: number;
     nombre: string;
     apellido: string;
-    tipo: "premium" | "no premium";
+    tipo: 'premium' | 'no premium' | '';
     historial: number;
     edad: number;
 
@@ -24,11 +25,16 @@ export default class Cliente implements ClienteInterface {
         this.edad = cliente.edad;
     }
 
+    public  isNull(): boolean {
+        return false; // Método para verificar si es un cliente nulo
+    }
+
+
     // Métodos "get"
     getid(): number { return this.id; }
     getnombre(): string { return this.nombre; }
     getapellido(): string { return this.apellido; }
-    getTipo(): "premium" | "no premium" { return this.tipo; }
+    getTipo(): "premium" | "no premium" | '' { return this.tipo; }
     getHistorial(): number { return this.historial; }
     getEdad(): number { return this.edad; }
 
