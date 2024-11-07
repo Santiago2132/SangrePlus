@@ -8,7 +8,7 @@ CREATE TABLE usuario (
 
 -- Creación de la tabla "cliente"
 CREATE TABLE cliente (
-    id  PRIMARY KEY,
+    id integer PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     apellido VARCHAR(255) NOT NULL,
     edad INTEGER NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE cliente (
 
 -- Creación de la tabla "turno"
 CREATE TABLE turno (
-    id_turno PRIMARY KEY,
+    id_turno integer PRIMARY KEY,
     turno VARCHAR(255) NOT NULL,
     modulo VARCHAR(255) NOT NULL,
     numero INTEGER NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE turno (
 
 -- Creación de la tabla "cita"
 CREATE TABLE cita (
-    id PRIMARY KEY,
+    id integer PRIMARY KEY,
     tipocita VARCHAR(255) NOT NULL,
     cliente_id INTEGER REFERENCES cliente(id) ON DELETE SET NULL,
     fecha DATE NOT NULL,
