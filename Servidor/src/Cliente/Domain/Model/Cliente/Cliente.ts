@@ -15,7 +15,7 @@ export default class Cliente implements ClienteInterface {
     historial: number;
     edad: number;
 
-    constructor(cliente:ClienteInterface) {
+    constructor(cliente: ClienteInterface) {
         this.id = cliente.id;
         this.nombre = cliente.nombre;
         this.apellido = cliente.apellido;
@@ -24,12 +24,19 @@ export default class Cliente implements ClienteInterface {
         this.edad = cliente.edad;
     }
 
-    // Método adicional para calcular el descuento
-    public calcularDescuento(): number {
-        if (this.tipo === "premium") {
-            return this.historial * 0.1; // Aplica un descuento del 10% basado en el historial
-        } else {
-            return 0; // No hay descuento para clientes no premium
-        }
-    }
+    // Métodos "get"
+    getid(): number { return this.id; }
+    getnombre(): string { return this.nombre; }
+    getapellido(): string { return this.apellido; }
+    getTipo(): "premium" | "no premium" { return this.tipo; }
+    getHistorial(): number { return this.historial; }
+    getEdad(): number { return this.edad; }
+
+    // Métodos "set"
+    setId(value: number): void { this.id = value; }
+    setNombre(value: string): void { this.nombre = value; }
+    setApellido(value: string): void { this.apellido = value; }
+    setTipo(value: "premium" | "no premium"): void { this.tipo = value; }
+    setHistorial(value: number): void { this.historial = value; }
+    setEdad(value: number): void { this.edad = value; }
 }
