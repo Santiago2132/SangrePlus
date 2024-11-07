@@ -1,4 +1,4 @@
-export default interface DBTurno {
+export default interface DBTurnoPort {
     id_turno: number;
     turno: string;
     modulo: string;

@@ -5,6 +5,6 @@ export default interface CitaUseCasePort{
     agregarCita: (cita: Cita)=> Promise<Cita>;
     eliminarCita: (id: number)=> Promise<void>;
     editarCita: (cita: Cita)=> Promise<Cita>;
-    buscarCitaPorCliente: (clienteId: number)=> Promise<Cita[]>;
+    buscarCitaPorCliente: (clienteId: number)=> Promise<Cita>;
     getCitas:()=> Promise<Cita[]>;
 }

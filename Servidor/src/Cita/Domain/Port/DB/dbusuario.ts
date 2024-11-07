@@ -1,4 +1,4 @@
-export default interface DBUsuario {
+export default interface DBUsuarioPort {
     id: number;
     nombre: string;
     contrasena: string;

@@ -16,40 +16,40 @@ export default class CitaControllerExpress implements CitaControllerExpressPort 
     }
   }
 
-  
+
   // Agregar una nueva cita
-  agregarCita(req: Request, res: Response): void {
+  async agregarCita(req: Request, res: Response): Promise<void> {
     const citaData = req.body;
-    // Lógica para agregar una cita (por ahora, simula una respuesta)
-    res.status(201).json({ message: 'Cita agregada exitosamente', data: citaData });
+    const citas = await this.useCita.agregarCita(citaData); // Método que retorna todas las citas
+    res.status(201).json({ message: 'Cita agregada exitosamente', data: citas });
   }
 
   // Eliminar una cita
-  eliminarCita(req: Request, res: Response): void {
+  async  eliminarCita(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    // Lógica para eliminar la cita con el ID proporcionado
-    res.status(200).json({ message: `Cita con ID ${id} eliminada exitosamente` });
+    const citas = await this.useCita.eliminarCita(parseInt(id));
+    res.status(200).json({ message: `Cita con ID ${id} eliminada exitosamente`, data: citas });
   }
 
   // Modificar una cita
-  modificarCita(req: Request, res: Response): void {
+  async modificarCita(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const updatedCitaData = req.body;
-    // Lógica para modificar la cita con el ID proporcionado
-    res.status(200).json({ message: `Cita con ID ${id} modificada exitosamente`, data: updatedCitaData });
+    const citas = await this.useCita.editarCita(updatedCitaData);
+    res.status(200).json({ message: `Cita con ID ${id} modificada exitosamente`, data: citas });
   }
 
   // Obtener una cita específica por ID
-  obtenerCitaId(req: Request, res: Response): void {
+  async obtenerCitaId(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    // Lógica para obtener la cita con el ID proporcionado
-    res.status(200).json({ message: `Detalles de la cita con ID ${id}`, data: {} });
+    const citas = await this.useCita.getCitaById(parseInt(id));
+    res.status(200).json({ message: `Detalles de la cita con ID ${id}`, data: citas });
   }
 
   // Obtener citas (otro posible método, renombrado o específico)
-  citas(req: Request, res: Response): void {
-    // Lógica para obtener citas específicas
-    res.status(200).json({ message: 'Obteniendo citas especiales', data: [] });
+  async citas(req: Request, res: Response): Promise<void> {
+    const citas = await this.useCita.getCitas();
+    res.status(200).json({ message: 'Obteniendo citas especiales', data: citas });
   }
 
 
