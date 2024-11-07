@@ -1,4 +1,4 @@
-import Cliente from "../Cliente/Cliente";
+import Cliente from "../../../Cliente/Cliente";
 import Turno from "../Turno/Turno";
 
 export default interface CitaInterface {
