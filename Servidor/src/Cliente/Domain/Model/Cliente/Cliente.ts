@@ -15,13 +15,13 @@ export default class Cliente implements ClienteInterface {
     historial: number;
     edad: number;
 
-    constructor(id: number, nombre: string, apellido: string, tipo: "premium" | "no premium", historial: number, edad: number) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.tipo = tipo;
-        this.historial = historial;
-        this.edad = edad;
+    constructor(cliente:ClienteInterface) {
+        this.id = cliente.id;
+        this.nombre = cliente.nombre;
+        this.apellido = cliente.apellido;
+        this.tipo = cliente.tipo;
+        this.historial = cliente.historial;
+        this.edad = cliente.edad;
     }
 
     // Método adicional para calcular el descuento

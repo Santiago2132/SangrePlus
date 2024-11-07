@@ -10,6 +10,11 @@ export default class CitaUseCase implements CitaUseCasePort {
   ) {
     
   }
+  getCitaById: (id: number) => Promise<Cita>;
+  agregarCita: (cita: Cita) => Promise<Cita>;
+  eliminarCita: (id: number) => Promise<void>;
+  editarCita: (cita: Cita) => Promise<Cita>;
+  buscarCitaPorCliente: (clienteId: number) => Promise<Cita[]>;
 
   public buscarCitaPorFecha = async (fecha: Date): Promise<Cita[]> => {
     const citas = await this.citaService.buscarCitaPorFecha(fecha);
