@@ -1,6 +1,6 @@
 import Cita from "../../Domain/Model/Cita/Cita"
-import CitaServicePort from "../../Domain/Port/Driver/CitaServicePort"
-import CitaUseCasePort from "../../Domain/Port/Driver/CitaUseCasePort"
+import CitaServicePort from "../../Domain/Port/Driver/ClienteServicePort"
+import CitaUseCasePort from "../../Domain/Port/Driver/ClienteUseCasePort"
 
 
 export default class CitaUseCase implements CitaUseCasePort {

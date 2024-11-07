@@ -1,6 +1,6 @@
 import RouterExpress from "../../../../Express/Domain/RouterExpress"
-import CitaControllerExpressPort from "../../../Domain/Port/Driver/CitaControllerExpressPort"
-import CitaRouterExpressPort from "../../../Domain/Port/Driver/CitasRouterExpressPort"
+import CitaControllerExpressPort from "../../../Domain/Port/Driver/ClienteControllerExpressPort"
+import CitaRouterExpressPort from "../../../Domain/Port/Driver/ClienteRouterExpressPort"
 
 
 export default class CitaRouterExpress extends RouterExpress implements CitaRouterExpressPort {

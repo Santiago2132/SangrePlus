@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import CitaControllerExpressPort from '../../../Domain/Port/Driver/CitaControllerExpressPort'
+import CitaControllerExpressPort from '../../../Domain/Port/Driver/ClienteControllerExpressPort'
 
 //import MovieUseCasePort from '../../../domain/port/driver/MovieUseCasePort'
 
