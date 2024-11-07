@@ -1,10 +1,10 @@
-export default class cAsistidasView {
+export default class cNoAsistidasView {
     selector = null;
     template;
     constructor(template) {
         this.template = template;
         document.addEventListener('DOMContentLoaded', () => {
-            this.selector = document.getElementById('asistidas');
+            this.selector = document.getElementById('nasistidas');
             if (!this.selector) {
                 // Crear el contenedor en caso de que no exista y añadirlo al body
                 this.selector = document.createElement('div');

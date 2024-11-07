@@ -1,6 +1,6 @@
-export default class cAsistidasTemplate {
+export default class cNoAsistidasTemplate {
     constructor() {
-        console.log('cAsistidasTemplate constructor');
+        console.log('NoAsistidasTemplate constructor');
     }
     getHTML(citas) {
         // Simplificamos el HTML y lo organizamos para que sea fácil de leer

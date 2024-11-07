@@ -1,36 +1,40 @@
 import cAsistidasTemplate from "../template/cAsistidasTemplate.js";
 
 export default class cAsistidasView {
-    private selector: HTMLDivElement;
+    private selector: HTMLElement | null = null;
     private template: cAsistidasTemplate;
-    private selectorName = 'asistidas';  // Este es el id correcto del contenedor
 
     constructor(template: cAsistidasTemplate) {
         this.template = template;
-        this.selector = document.createElement('div');  // Inicializar el contenedor
-        this.selector.id = this.selectorName;  // Asegurarse de que tiene el id correcto
-    }
 
-    public init(citas: any[]): void {
-        // Verificar si el contenedor ya existe en el DOM, si no lo agregamos
-        let existingContainer = document.getElementById(this.selectorName);
-        if (!existingContainer) {
-            document.body.appendChild(this.selector);  // Si no existe, lo agregamos al DOM
-        }
-        
-        // Llamar al render después de asegurar que el contenedor está en el DOM
-        this.render(citas);
+        document.addEventListener('DOMContentLoaded', () => {
+            this.selector = document.getElementById('asistidas');
+            
+            if (!this.selector) {
+                // Crear el contenedor en caso de que no exista y añadirlo al body
+                this.selector = document.createElement('div');
+                this.selector.id = 'asistidas';
+                document.body.appendChild(this.selector);
+            }
+        });
     }
 
     public render(citas: any[]): void {
-        console.log("Renderizando citas asistidas", citas);  // Log para ver si las citas llegan correctamente
+        console.log("Renderizando citas asistidas", citas);
+
+        // Verificar nuevamente el contenedor antes de renderizar
+        if (!this.selector) {
+            console.error("El contenedor 'asistidas' no se encontró.");
+            return;
+        }
+
+        // Si no hay citas, mostrar un mensaje
         if (!citas || citas.length === 0) {
             this.selector.innerHTML = '<p>No se encontraron citas asistidas.</p>';
             return;
         }
-        this.selector.innerHTML = '';  // Limpiar el contenido actual
 
-        // Asegurarse de que el contenedor existe en el DOM antes de insertar el contenido
-        this.selector.innerHTML = this.template.getHTML(citas);  // Pasar citas a la plantilla
+        // Generar el contenido HTML usando el template
+        this.selector.innerHTML = this.template.getHTML(citas);
     }
 }

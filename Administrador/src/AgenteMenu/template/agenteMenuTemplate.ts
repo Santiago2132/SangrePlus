@@ -15,7 +15,7 @@ export default class AgenteMenuTemplate {
                     <table class="turnos-table">
                         <thead>
                             <tr>
-                                <th>Orden de Turnos</th>
+                                <th>Orden de Turnoss</th>
                                 <th>ID Turno</th>
                                 <th>ID Cita</th>
                                 <th>Hora</th>

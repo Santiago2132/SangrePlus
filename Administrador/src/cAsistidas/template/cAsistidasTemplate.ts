@@ -3,7 +3,8 @@ export default class cAsistidasTemplate {
         console.log('cAsistidasTemplate constructor');
     }
 
-    public getHTML = (citas: any[]): string => {
+    public getHTML(citas: any[]): string {
+        // Simplificamos el HTML y lo organizamos para que sea fácil de leer
         return `
             <div class="container">
                 <h2>Turnos Asistidos</h2>
@@ -19,21 +20,21 @@ export default class cAsistidasTemplate {
                             <th>Observaciones</th>
                         </tr>
                     </thead>
-                    <tbody id="turnos-body">
+                    <tbody>
                         ${citas.map(cita => `
                             <tr>
                                 <td>${cita.cita_num}</td>
-                                <td>${cita.cita?.tipocita}</td>
-                                <td>${cita.cita?.cliente?.nombre} ${cita.cita?.cliente?.apellido}</td>
-                                <td>${cita.cita?.fecha} ${cita.cita?.hora}</td>
-                                <td>${cita.cita?.lugar}</td>
-                                <td>${cita.cita?.estado}</td>
-                                <td>${cita.cita?.observaciones}</td>
+                                <td>${cita.cita?.tipocita ?? 'N/A'}</td>
+                                <td>${cita.cita?.cliente?.nombre ?? 'N/A'} ${cita.cita?.cliente?.apellido ?? 'N/A'}</td>
+                                <td>${cita.cita?.fecha ?? 'N/A'} ${cita.cita?.hora ?? 'N/A'}</td>
+                                <td>${cita.cita?.lugar ?? 'N/A'}</td>
+                                <td>${cita.cita?.estado ?? 'N/A'}</td>
+                                <td>${cita.cita?.observaciones ?? 'N/A'}</td>
                             </tr>
                         `).join('')}
                     </tbody>
                 </table>
             </div>
         `;
-    };
+    }
 }

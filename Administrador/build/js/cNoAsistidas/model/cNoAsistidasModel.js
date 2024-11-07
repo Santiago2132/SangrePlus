@@ -1,4 +1,4 @@
-export default class cAsistidasModel {
+export default class cNoAsistidasModel {
     turnosData;
     citasData;
     clientesData;
@@ -28,7 +28,7 @@ export default class cAsistidasModel {
             { id: 6, nombre: "Pedro", apellido: "González", edad: 60, tipo: "no premium", historial: 4 }
         ];
     }
-    getCitasAsistidas() {
+    getCitasNoAsistidas() {
         console.log('Filtrando citas asistidas...');
         const citasAsistidas = this.turnosData.map(turno => {
             const cita = this.citasData.find(c => c.id === turno.cita_id);
@@ -40,7 +40,7 @@ export default class cAsistidasModel {
                     cliente: cliente ? { nombre: cliente.nombre, apellido: cliente.apellido } : null
                 } : null
             };
-        }).filter(turno => turno.cita?.estado === 'asistida'); // Filtrar solo las citas asistidas
+        }).filter(turno => turno.cita?.estado === 'no-asistida'); // Filtrar solo las citas asistidas
         console.log('Citas asistidas filtradas:', citasAsistidas);
         return citasAsistidas;
     }
