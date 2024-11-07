@@ -15,6 +15,7 @@ export default class AdminMenuTemplate {
                 <div class="admin-content">
                     <asistidas id="asistidas"></asistidas>
                     <nasistidas id="nasistidas"></nasistidas>
+                    <div id="asistidas"></div>
                 </div>
             </div>
         `;
