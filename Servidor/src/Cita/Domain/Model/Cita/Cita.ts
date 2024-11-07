@@ -1,14 +1,27 @@
-import Cliente from "../Cliente/Cliente";
-import Turno from "../Turno/Turno";
+import Cliente from "../../../../Cliente/Domain/Model/Cliente/Cliente";
+import Turno from "../../../../Turno/Domain/Model/Turno/Turno";
+
 
 export default interface CitaInterface {
     id: number;
-    cliente: Cliente;
+    tipocita: string;
     fecha: Date;
-    turno: Turno
     hora: string;
     descripcion: string;
+    cliente_id: number;
     lugar: string;
+    estado: string;
+    observaciones: string;
+
+    id SERIAL PRIMARY KEY,
+    tipocita VARCHAR(255) NOT NULL,
+    cliente_id INTEGER REFERENCES cliente(id) ON DELETE SET NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    descripcion TEXT NOT NULL,
+    lugar VARCHAR(255) NOT NULL,
+    estado VARCHAR(255) CHECK (estado IN ('pendiente', 'asistida', 'cancelada')) NOT NULL,
+    observaciones TEXT
 }
 
 
