@@ -230,3 +230,67 @@ button[type="submit"]:hover {
         padding: 15px;
     }
 }
+/*---------------------------------*/
+/* Estilos de Tabla de Turnos */
+.turnos-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.turnos-table th, .turnos-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+}
+
+.turnos-table th {
+    background-color: #b71c1c;
+    color: #fff;
+}
+
+.turnos-table td {
+    background-color: #fff;
+    color: #333;
+}
+
+.turnos-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Botones en la columna de Opciones */
+.turno-btn {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 6px 8px;
+    margin: 2px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.turno-btn:hover {
+    background-color: #f44336;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .turnos-table, .turnos-table th, .turnos-table td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .turnos-table th, .turnos-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .turno-btn {
+        padding: 5px;
+        font-size: 12px;
+    }
+}

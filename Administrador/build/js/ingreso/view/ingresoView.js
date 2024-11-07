@@ -17,4 +17,13 @@ export default class IngresoView {
         // Inicia la funcionalidad del toggle de contraseña
         this.template.initPasswordToggle();
     };
+    // Nuevo método para borrar el contenido de los campos input
+    clearInputs = () => {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        if (usernameInput)
+            usernameInput.value = ''; // Borra el contenido del campo de usuario
+        if (passwordInput)
+            passwordInput.value = ''; // Borra el contenido del campo de contraseña
+    };
 }

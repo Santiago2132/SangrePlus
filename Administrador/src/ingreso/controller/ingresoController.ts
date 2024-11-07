@@ -1,6 +1,7 @@
 // Importamos las clases necesarias
 
 import AdminMenuController from "../../adminMenu/controller/adminMenuController.js";
+import AgenteMenuController from "../../AgenteMenu/controller/agenteMenuController.js";
 import { IngresoModel, User } from "../model/ingresoModel.js";
 import IngresoTemplate from "../template/ingresoTemplate.js";
 import IngresoView from "../view/ingresoView.js";
@@ -10,10 +11,12 @@ export default class IngresoController {
     private ingresoModel: IngresoModel;
     private usuario: User | null = null;
     private adminMenu: AdminMenuController | null = null;
+    private agenteMenu: AgenteMenuController | null = null;
     constructor() {
         this.ingresoView = new IngresoView(new IngresoTemplate());
         this.ingresoModel = new IngresoModel();
         this.adminMenu = new AdminMenuController();
+        this.agenteMenu = new AgenteMenuController();
     }
 
     public init = (): void => {
@@ -57,20 +60,27 @@ export default class IngresoController {
 
     private renderUserView = (usuario: User): void => {
         const ingresoContainer = document.getElementById(this.ingresoView.selectorName);
-        if (ingresoContainer) ingresoContainer.remove();
+        if (ingresoContainer) ingresoContainer.style.display = 'none'; // Oculta el contenedor sin eliminarlo
         
         if (usuario.tipo === 'admin') {
-            this.showComponent("admin")
+            this.showComponent("admin");
             console.log('Cargando vista de administrador...');
-            this.adminMenu?.init()
+            this.adminMenu?.init();
         } else {
             console.log('Cargando vista de agente...');
+            this.agenteMenu?.init();
         }
     }
+    
     private showComponent(component: string): void {
         const selectedComponent = document.getElementById(component);
         if (selectedComponent) {
             selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
+    }
+
+    // Nuevo método para limpiar el formulario
+    public clearForm = (): void => {
+        this.ingresoView.clearInputs();
     }
 }

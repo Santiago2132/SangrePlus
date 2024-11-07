@@ -1,5 +1,6 @@
 // Importamos las clases necesarias
 import AdminMenuController from "../../adminMenu/controller/adminMenuController.js";
+import AgenteMenuController from "../../AgenteMenu/controller/agenteMenuController.js";
 import { IngresoModel } from "../model/ingresoModel.js";
 import IngresoTemplate from "../template/ingresoTemplate.js";
 import IngresoView from "../view/ingresoView.js";
@@ -8,10 +9,12 @@ export default class IngresoController {
     ingresoModel;
     usuario = null;
     adminMenu = null;
+    agenteMenu = null;
     constructor() {
         this.ingresoView = new IngresoView(new IngresoTemplate());
         this.ingresoModel = new IngresoModel();
         this.adminMenu = new AdminMenuController();
+        this.agenteMenu = new AgenteMenuController();
     }
     init = () => {
         this.render();
@@ -51,7 +54,7 @@ export default class IngresoController {
     renderUserView = (usuario) => {
         const ingresoContainer = document.getElementById(this.ingresoView.selectorName);
         if (ingresoContainer)
-            ingresoContainer.remove();
+            ingresoContainer.style.display = 'none'; // Oculta el contenedor sin eliminarlo
         if (usuario.tipo === 'admin') {
             this.showComponent("admin");
             console.log('Cargando vista de administrador...');
@@ -59,6 +62,7 @@ export default class IngresoController {
         }
         else {
             console.log('Cargando vista de agente...');
+            this.agenteMenu?.init();
         }
     };
     showComponent(component) {
@@ -67,4 +71,8 @@ export default class IngresoController {
             selectedComponent.style.display = 'block'; // Muestra el componente seleccionado
         }
     }
+    // Nuevo método para limpiar el formulario
+    clearForm = () => {
+        this.ingresoView.clearInputs();
+    };
 }
