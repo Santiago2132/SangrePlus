@@ -33,6 +33,7 @@ export default class TurnoRepository implements TurnoRepositoryPort {
     }
 
     async save(item: Turno): Promise<boolean > {
+        console.log(item)
         const dbTurno = await this.turnoDB.agregarTurno(this.toDBTurnoPort(item)); // Convertimos a DBTurnoPort antes de guardar
         if(dbTurno){
             return true

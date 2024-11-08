@@ -32,19 +32,19 @@ export default class TurnoUseCase implements TurnoUseCasePort {
 
             // Obtener el siguiente número de turno disponible
             const numeroTurno = await this.proximoTurno(esPrioritario);
-            const id= await this.getTurnos() as Turno[]
+            const idTurno= await this.getTurnos() as Turno[]
 
             // Crear el nuevo turno con prioridad
             const nuevoTurno = new Turno({
-                id_turno: id.length,  // Será autogenerado
+                id_turno: idTurno.length+1,  // Será autogenerado
                 turno: numeroTurno,
                 modulo: '',
-                numero: 0,
+                numero: 1,
                 cita_id: cita.id
             });
             // Guardar el turno en la base de datos
             const turnoCreado = await this.agregarTurno(nuevoTurno);
-            
+            console.log(turnoCreado)
             const turno= await this.agregarTurnoLista(nuevoTurno)
             console.log(turnoCreado,turno)
 
@@ -196,14 +196,16 @@ export default class TurnoUseCase implements TurnoUseCasePort {
 
 
        // Convierte un objeto DBTurnoPort a Turno
-       fromTurnoPort(dbTurno: Turno): Turno {
+    fromTurnoPort(dbTurno: Turno): Turno {
+        console.log('turno ' + dbTurno.getIdTurno());
+    
         return new Turno({
-            id_turno:dbTurno.getIdTurno(), 
-            turno:dbTurno.getTurno(), 
-            modulo:dbTurno.getModulo() || '' , // Quitar "modulo:"
-            numero:dbTurno.getNumero(), 
+            id_turno: dbTurno.getIdTurno(), // Convierte el valor a string
+            turno: dbTurno.getTurno(),
+            modulo: dbTurno.getModulo() || '', // Si no tiene modulo, se asigna un string vacío
+            numero: dbTurno.getNumero(),
             cita_id: dbTurno.getCitaId()
-        }
-        );
+        });
     }
+    
 }

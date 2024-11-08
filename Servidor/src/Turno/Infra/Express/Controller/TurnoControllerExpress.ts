@@ -12,7 +12,7 @@ export default class TurnoControllerExpress implements TurnoControllerExpressPor
   async getTurnoByIdCita(req: Request, res: Response): Promise<void> {
     try {
       const {id}= req.query
-      const turno = await this.turnoUso.getTurnoByIdCita(Number(id as string));
+      const turno = await this.turnoUso.getTurnoByIdCita(parseInt(id as string));
       res.status(200).json({ message: 'Turno obtenido por ID de Cita', data: turno });
     } catch (error) {
       console.error('Error al obtener turno por ID de cita:', error);
@@ -24,7 +24,7 @@ export default class TurnoControllerExpress implements TurnoControllerExpressPor
   async getTurnoByIdTurno(req: Request, res: Response): Promise<void> {
     try {
       const {id}= req.query
-      const turno = await this.turnoUso.getTurnoByIdTurno(Number(id as string));
+      const turno = await this.turnoUso.getTurnoByIdTurno(parseInt(id as string));
       res.status(200).json({ message: 'Turno obtenido por ID de Turno', data: turno });
     } catch (error) {
       console.error('Error al obtener turno por ID de turno:', error);
