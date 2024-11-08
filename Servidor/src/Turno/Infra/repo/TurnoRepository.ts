@@ -2,7 +2,7 @@ import NullTurno from "../../Domain/Model/Turno/NullTurno";
 import Turno from "../../Domain/Model/Turno/Turno";
 import DBTurnoPort from "../../Domain/Port/DB/DBTurnoPort";
 import TurnoRepositoryPort from "../../Domain/Port/Driven/TurnoRepositoryPort";
-import TurnoDB from "../db/Turnodb";
+import TurnoDB from "../db/TurnoDB";
 
 
 export default class TurnoRepository implements TurnoRepositoryPort {
@@ -32,15 +32,16 @@ export default class TurnoRepository implements TurnoRepositoryPort {
         return dbTurno ? this.fromDBTurnoPort(dbTurno) : new NullTurno();
     }
 
-    async save(item: Turno): Promise<Boolean > {
+    async save(item: Turno): Promise<boolean > {
         const dbTurno = await this.turnoDB.agregarTurno(this.toDBTurnoPort(item)); // Convertimos a DBTurnoPort antes de guardar
         if(dbTurno){
             return true
         }else{
             return false
-        }    }
+        }    
+    }
 
-    async update(id: number, item: Partial<Turno>): Promise<Boolean> {
+    async update(id: number, item: Partial<Turno>): Promise<boolean> {
         const dbTurno = await this.turnoDB.modificarTurno({
             ...this.toDBTurnoPort(item as Turno),
             id_turno: id,
@@ -60,11 +61,11 @@ export default class TurnoRepository implements TurnoRepositoryPort {
         // Convierte un objeto Turno a DBTurnoPort
     toDBTurnoPort(turno: Turno): DBTurnoPort {
         return {
-            id_turno: turno.getIdTurno,
-            turno: turno.getTurno,
-            modulo: turno.getModulo || '',
-            numero: turno.getNumero,
-            cita_id: turno.getCitaId,
+            id_turno: turno.getIdTurno(),
+            turno: turno.getTurno(),
+            modulo: turno.getModulo() || '',
+            numero: turno.getNumero(),
+            cita_id: turno.getCitaId(),
         };
     }
 

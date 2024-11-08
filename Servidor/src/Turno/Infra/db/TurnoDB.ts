@@ -1,4 +1,4 @@
-import DatabaseConexion from "../../../Cliente/Infra/db/DBC";
+import DatabaseConexion from "../../../Turno/Infra/db/DBC";
 import DBTurnoPort from "../../Domain/Port/DB/DBTurnoPort"; // Asegúrate de que esta interfaz esté correctamente importada
 
 export default class TurnoDB {
@@ -156,4 +156,6 @@ export default class TurnoDB {
             return false; // Si ocurre un error, retorna false
         }
     }
+
+
 }

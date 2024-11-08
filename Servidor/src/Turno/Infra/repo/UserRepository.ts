@@ -27,10 +27,10 @@ export default class UserRepository implements UserRepositoryPort{
         const tipoValido = dbUsuario.tipo === "admin" || dbUsuario.tipo === "agente" ? dbUsuario.tipo : "agente"; 
     
         return new Usuario(
-            dbUsuario.id,
-            dbUsuario.nombre,
-            dbUsuario.contrasena,
-            tipoValido
+            {   id: dbUsuario.id,
+                nombre:dbUsuario.nombre,
+                contrasena:dbUsuario.contrasena,
+                tipo:tipoValido}
         );
     }
     
@@ -44,18 +44,23 @@ export default class UserRepository implements UserRepositoryPort{
     };
 
     findById: (id: number) => Promise<Usuario> = async (id) => {
+        console.log(id)
         throw new Error("Método no implementado");
     };
 
-    save: (item: Usuario) => Promise<Boolean> = async (item) => {
+    save: (item: Usuario) => Promise<boolean> = async (item) => {
+        console.log(item)
         throw new Error("Método no implementado");
     };
 
-    update: (id: number, item: Partial<Usuario>) => Promise<Boolean> = async (id, item) => {
+    update: (id: number, item: Partial<Usuario>) => Promise<boolean> = async (id, item) => {
+        console.log(id,item)
+
         throw new Error("Método no implementado");
     };
 
     delete: (id: number) => Promise<boolean> = async (id) => {
+        console.log(id)
         throw new Error("Método no implementado");
     };
 

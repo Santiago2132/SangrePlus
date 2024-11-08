@@ -1,4 +1,4 @@
-import DatabaseConexion from "../../../Cliente/Infra/db/DBC";
+import DatabaseConexion from "../../../Turno/Infra/db/DBC";
 import DBUsuarioPort from "../../Domain/Port/DB/DBUserPort";
 
 export default class UserDB {

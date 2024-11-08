@@ -5,4 +5,6 @@ export default interface ClienteUseCasePort{
     agregarCliente: (cliente: Cliente)=> Promise<Cliente>;
     eliminarCliente: (id: number)=> Promise<boolean>;
     editarCliente: (cita: Cliente)=> Promise<Cliente>;
+    verificarPrioridad: (id:number)=>Promise<boolean>;
+
 }

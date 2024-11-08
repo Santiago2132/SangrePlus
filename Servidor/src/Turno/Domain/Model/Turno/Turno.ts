@@ -29,52 +29,52 @@ export default class Turno  {
     }
 
     // Getter para id_turno
-    get getIdTurno(): number {
+     getIdTurno(): number {
         return this._id_turno;
     }
 
     // Setter para id_turno
-    set setIdTurno(id_turno: number) {
+     setIdTurno(id_turno: number) {
         this._id_turno = id_turno;
     }
 
     // Getter para turno
-    get getTurno(): string {
+    getTurno(): string {
         return this._turno;
     }
 
     // Setter para turno
-    set setTurno(turno: string) {
+     setTurno(turno: string) {
         this._turno = turno;
     }
 
     // Getter para modulo (puede ser undefined)
-    get getModulo(): string | undefined {
+     getModulo(): string | undefined {
         return this._modulo;
     }
 
     // Setter para modulo
-    set setModulo(modulo: string | undefined) {
+     setModulo(modulo: string | undefined) {
         this._modulo = modulo || '';
     }
 
     // Getter para numero
-    get getNumero(): number {
+     getNumero(): number {
         return this._numero;
     }
 
     // Setter para numero
-    set setNumero(numero: number) {
+     setNumero(numero: number) {
         this._numero = numero;
     }
 
     // Getter para cita_id
-    get getCitaId(): number {
+     getCitaId(): number {
         return this._cita_id;
     }
 
     // Setter para cita_id
-    set setCitaId(cita_id: number) {
+     setCitaId(cita_id: number) {
         this._cita_id = cita_id;
     }
 }

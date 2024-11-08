@@ -10,6 +10,7 @@ export default class ClienteUseCase implements ClienteUseCasePort {
     constructor(clienteService: ClienteService) {
         this.clienteService = clienteService;
     }
+   
 
     // Método para validar y convertir datos de entrada en una instancia de Cliente sin lanzar un error
     private mapToCliente(data: any): Cliente | null {
@@ -37,7 +38,7 @@ export default class ClienteUseCase implements ClienteUseCasePort {
         }
     }
 
-    async agregarCliente(data: any): Promise<Cliente> {
+    async agregarCliente(data: Cliente): Promise<Cliente> {
         try {
             const cliente = this.mapToCliente(data);
             return cliente ? await this.clienteService.agregarCliente(cliente) : new NullCliente();
@@ -57,7 +58,7 @@ export default class ClienteUseCase implements ClienteUseCasePort {
         }
     }
 
-    async editarCliente(data: any): Promise<Cliente> {
+    async editarCliente(data: Cliente): Promise<Cliente> {
         try {
             const cliente = this.mapToCliente(data);
             return cliente ? await this.clienteService.editarCliente(cliente) :  new NullCliente();
@@ -67,4 +68,27 @@ export default class ClienteUseCase implements ClienteUseCasePort {
             return new NullCliente();
         }
     }
+
+    async verificarPrioridad(id: number): Promise<boolean> {
+        try {
+            // Obtener datos del cliente
+            const data = await this.clienteService.getCliente(id); // Supón que este método obtiene los datos de cliente
+            const cliente = this.mapToCliente(data);
+    
+            // Verificar si el cliente existe
+            if (!cliente) {
+                console.warn(`Cliente con ID ${id} no encontrado`);
+                return false;
+            }
+    
+            // Verificar condiciones de prioridad: edad > 60 o tipo "premium"
+            const tienePrioridad = cliente.edad > 60 || cliente.tipo === "premium";
+            
+            return tienePrioridad;
+        } catch (error) {
+            console.error("Error al verificar prioridad del cliente:", error);
+            return false;
+        }
+    }
+    
 }

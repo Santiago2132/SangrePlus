@@ -16,43 +16,30 @@ export default class NullTurno extends Turno {
 
     // Sobreescribir los getters y setters para que no modifiquen ni devuelvan valores reales
 
-    public override get getIdTurno(): number {
+    public override  getIdTurno(): number {
         return 0;  // Devuelve un valor por defecto
     }
 
-    public override set setIdTurno(id_turno: number) {
-        // No hace nada
-    }
-
-    public override get getTurno(): string {
+    public override getTurno(): string {
         return 'No Disponible';  // Valor por defecto
     }
 
-    public override set setTurno(turno: string) {
-        // No hace nada
-    }
 
-    public override get getModulo(): string | undefined {
+
+    public override  getModulo(): string | undefined {
         return '';  // Valor por defecto
     }
-
-    public override set setModulo(modulo: string | undefined) {
-        // No hace nada
-    }
-
-    public override get getNumero(): number {
+   
+    public override  getNumero(): number {
         return 0;  // Valor por defecto
     }
 
-    public override set setNumero(numero: number) {
-        // No hace nada
-    }
 
-    public override get getCitaId(): number {
-        return 0;  // Valor por defecto
-    }
 
-    public override set setCitaId(cita_id: number) {
-        // No hace nada
-    }
+    
+    public override setNumero = (_value: number): void => {};
+    public override setCitaId = (_value: number): void => {};
+    public override setModulo = (_value: string): void => {};
+    public override setIdTurno = (_value: number): void => {};
+    
 }
