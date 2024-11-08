@@ -24,11 +24,8 @@ export default class NuevaCitaTemplate {
                     <label for="identificacion">Identificación:</label>
                     <div id="idee">
                         <select id="tipo-identificacion" name="tipo-identificacion" required>
-                        <div id="identiti">
                             <option value="TI">T. I.</option>
                             <option value="CI">C. I.</option>
-                        </div>
-                        
                         </select>
                         <input type="text" id="identificacion" name="identificacion" required>
                     </div>
@@ -64,8 +61,10 @@ export default class NuevaCitaTemplate {
                     <button type="submit">Agendar Cita</button>
                 </div>
             </form>
+            <div id="cita-id-container"></div> <!-- Contenedor para mostrar el ID de la cita -->
         `;
     }
+
     public showError = (message: string): void => {
         const errorDiv = document.getElementById('alerta-error');
         if (errorDiv) {

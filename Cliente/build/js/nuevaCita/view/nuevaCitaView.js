@@ -43,4 +43,16 @@ export default class NuevaCitaView {
             this.onSubmitCallback(citaData); // Llamar al callback con los datos de la cita
         }
     };
+    // Mostrar el ID de la cita generado
+    showCitaId = (citaId) => {
+        const citaIdContainer = document.getElementById('cita-id-container');
+        if (citaIdContainer) {
+            citaIdContainer.textContent = `ID de la cita: ${citaId}`;
+        }
+    };
+    // Limpiar el formulario
+    clearForm = () => {
+        const form = document.getElementById('nueva-cita-form');
+        form.reset();
+    };
 }

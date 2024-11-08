@@ -1,3 +1,4 @@
+// src/nuevaCita/controller/nuevaCitaController.ts
 import NuevaCitaTemplate from "../template/nuevaCitaTemplate.js";
 import NuevaCitaView from "../view/nuevaCitaView.js";
 import NuevaCitaModel from "../model/nuevaCitaModel.js";
@@ -23,6 +24,8 @@ export default class NuevaCitaController {
     };
     handleCitaSubmission = (citaData) => {
         console.log("Datos de la cita recibidos en el controlador:", citaData);
-        this.nuevaCitaModel.procesarCita(citaData); // Pasa los datos al modelo para su procesamiento
+        const citaId = this.nuevaCitaModel.procesarCita(citaData); // Ahora citaId es un string
+        this.nuevaCitaView.showCitaId(citaId); // Muestra el ID en la vista
+        this.nuevaCitaView.clearForm(); // Limpia el formulario
     };
 }
