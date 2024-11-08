@@ -41,4 +41,9 @@ export default class AgenteMenuModel {
         });
         console.log("Turnos actualizados en el modelo:", this.turnosData); // Log para confirmar los cambios en el modelo
     }
+    eliminarTurno(id_turno) {
+        console.log("ID del turno a eliminar:", id_turno); // Confirmación del ID recibido
+        this.turnosData = this.turnosData.filter(turno => turno.id_turno !== id_turno);
+        console.log("Turnos después de la eliminación:", this.turnosData); // Confirmación del estado de turnosData
+    }
 }
