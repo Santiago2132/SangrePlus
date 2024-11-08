@@ -13,11 +13,11 @@ export default class ClienteControllerExpress {
   // Obtener cliente por ID
   async getCliente(req: Request, res: Response): Promise<void> {
     try {
-      const id = req.params['id']; // Usar notación de corchetes
+      const { id } = req.query ; // Usar req.query para obtener el parámetro de consulta
       if (!id) {
         res.status(400).json({ message: 'ID inválido' });
       }else{
-          const cliente = await this.clienteUseCase.getCliente(parseInt(id));
+          const cliente = await this.clienteUseCase.getCliente(parseInt(id as string));
           if (cliente instanceof NullCliente) {
             res.status(404).json({ message: 'Cliente no encontrado' });
           } else {

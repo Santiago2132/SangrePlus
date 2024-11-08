@@ -82,7 +82,7 @@ export default class ClienteDB {
             const query = 'DELETE FROM cliente WHERE id = $1';
             const result = await this.dbController.query(query, [id]);
 
-            if (result.rowCount === 0 || !result.rows[0])  {
+            if (result.rowCount === 0)  {
                 console.warn(`No se encontró el cliente con ID ${id} para eliminar`);
                 return false; // Retorna false si no se encontró el cliente para eliminar
             }

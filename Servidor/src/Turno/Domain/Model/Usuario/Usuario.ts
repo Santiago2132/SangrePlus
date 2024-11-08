@@ -1,21 +1,21 @@
-export default interface UsuarioInterface {
+export  interface UsuarioInterface {
     id: number;
     nombre: string;
     contrasena: string;
     tipo: "admin" | "agente";
 }
 
-export default class Usuario implements UsuarioInterface {
+export default class Usuario {
     id: number;
     nombre: string;
     contrasena: string;
     tipo: "admin" | "agente";
 
-    constructor(id: number, nombre: string, contrasena: string, tipo: "admin" | "agente") {
-        this.id = id;
-        this.nombre = nombre;
-        this.contrasena = contrasena;
-        this.tipo = tipo;
+    constructor(user: UsuarioInterface) {
+        this.id = user.id;
+        this.nombre = user.nombre;
+        this.contrasena = user.contrasena;
+        this.tipo = user.tipo;
     }
 
     // Puedes añadir métodos adicionales según sea necesario

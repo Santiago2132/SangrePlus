@@ -10,7 +10,7 @@ import ClienteUseCase from "../../../Cliente/App/UseCase/ClienteUseCase"
 import ClienteDB from "../../../Cliente/Infra/db/Clientedb"
 import DatabaseConexion1 from "../../../Cliente/Infra/db/DBC"
 import ClienteControllerExpress from "../../../Cliente/Infra/Express/Controller/ClienteControllerExpress"
-import ClienteRouterExpress from "../../../Cliente/Infra/Express/Router/CitaRouterExpress"
+import ClienteRouterExpress from "../../../Cliente/Infra/Express/Router/ClienteRouterExpress"
 
 import RepositoryCliente from "../../../Cliente/Infra/repo/RepositoryCliente"
 import Server from "../Server/Server"

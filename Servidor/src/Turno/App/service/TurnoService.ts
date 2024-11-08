@@ -1,8 +1,8 @@
 import Turno from "../../Domain/Model/Turno/Turno";
 import Usuario from "../../Domain/Model/Usuario/Usuario";
-import TurnoUseCasePort from "../../Domain/Port/Driver/TurnoUseCasePort";
+import TurnoServicePort from "../../Domain/Port/Driver/TurnoServicePort";
 
-export default class TurnoUseCase implements TurnoUseCasePort{
+export default class TurnoService implements TurnoServicePort{
     getTurnoByIdCita: (id: number) => Promise<Turno>;
     getTurnoByIdTurno: (id: number) => Promise<Turno>;
     getTurnos: () => Promise<Turno>;
@@ -10,5 +10,5 @@ export default class TurnoUseCase implements TurnoUseCasePort{
     agregarTurno: (turno: Turno) => Promise<boolean>;
     eliminarTurno: (id: number) => Promise<boolean>;
     validarCredenciales: (nombre: string, contrasena: string) => Promise<Usuario>;
-    
+
 }

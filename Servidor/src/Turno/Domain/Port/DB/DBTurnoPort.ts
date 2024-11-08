@@ -1,7 +1,7 @@
 export default interface DBTurnoPort {
     id_turno: number;
     turno: string;
-    modulo: string;
+    modulo?: string;
     numero: number;
-    cita_id: number | null;
+    cita_id: number;
 }
