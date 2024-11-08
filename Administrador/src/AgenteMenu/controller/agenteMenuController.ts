@@ -1,3 +1,4 @@
+// AgenteMenuController.ts
 import AgenteMenuTemplate from "../template/agenteMenuTemplate.js";
 import AgenteMenuView from "../view/agenteMenuView.js";
 import AgenteMenuModel from "../model/agenteMenuModel.js";
@@ -8,7 +9,7 @@ export default class AgenteMenuController {
 
     constructor() {
         this.agenteMenuModel = new AgenteMenuModel();
-        this.agenteMenuView = new AgenteMenuView(new AgenteMenuTemplate(), this.onOrdenChange);
+        this.agenteMenuView = new AgenteMenuView(new AgenteMenuTemplate(), this.onOrdenChange, this.onEliminarTurno);
     }
 
     public init() {
@@ -18,16 +19,18 @@ export default class AgenteMenuController {
     }
 
     public render() {
-        // Obtener datos del modelo
         const turnosConCitas = this.agenteMenuModel.getTurnosConCitas();
         this.agenteMenuView.render(turnosConCitas);
     }
 
     private onOrdenChange = (nuevoOrden: any[]): void => {
-        // Actualizar el modelo con el nuevo orden
-        console.log("Orden cambiado:", nuevoOrden);  // Log para confirmar el nuevo orden recibido
         this.agenteMenuModel.setTurnosConCitas(nuevoOrden);
+        this.render();
+    }
 
-        this.render();  // Renderizar con los datos actualizados
+    private onEliminarTurno = (id_turno: number): void => {
+        console.log("Eliminando turno con ID:", id_turno);
+        this.agenteMenuModel.eliminarTurno(id_turno);  // Llamar al método de eliminación en el modelo
+        this.render();  // Actualizar la vista después de la eliminación
     }
 }
