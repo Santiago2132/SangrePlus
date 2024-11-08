@@ -66,4 +66,18 @@ export default class NuevaCitaTemplate {
             </form>
         `;
     }
+    public showError = (message: string): void => {
+        const errorDiv = document.getElementById('alerta-error');
+        if (errorDiv) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+    };
+
+    public hideError = (): void => {
+        const errorDiv = document.getElementById('alerta-error');
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+        }
+    };
 }

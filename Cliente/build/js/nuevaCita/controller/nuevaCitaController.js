@@ -1,23 +1,28 @@
-import nuevaCitaTemplate from "../template/nuevaCitaTemplate.js";
+import NuevaCitaTemplate from "../template/nuevaCitaTemplate.js";
 import NuevaCitaView from "../view/nuevaCitaView.js";
-export default class nuevaCitaController {
+import NuevaCitaModel from "../model/nuevaCitaModel.js";
+export default class NuevaCitaController {
     nuevaCitaView;
+    nuevaCitaModel;
     constructor() {
-        this.nuevaCitaView = new NuevaCitaView(new nuevaCitaTemplate());
+        const template = new NuevaCitaTemplate();
+        this.nuevaCitaModel = new NuevaCitaModel();
+        this.nuevaCitaView = new NuevaCitaView(template, this.handleCitaSubmission); // Pasamos el callback
     }
     init = () => {
-        this.render(); // Llamamos al método render cuando se inicializa el controlador
+        this.render();
     };
-    // Método para renderizar la vista principal
     render = () => {
-        // Asegurarse de que el DOM está completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar la vista para que se renderice en el div con el ID 'main'
             this.nuevaCitaView.init().then(() => {
-                console.log('IndexView initialized and rendered.');
+                console.log('NuevaCitaView initialized and rendered.');
             }).catch((error) => {
-                console.error('Error initializing IndexView:', error);
+                console.error('Error initializing NuevaCitaView:', error);
             });
         });
+    };
+    handleCitaSubmission = (citaData) => {
+        console.log("Datos de la cita recibidos en el controlador:", citaData);
+        this.nuevaCitaModel.procesarCita(citaData); // Pasa los datos al modelo para su procesamiento
     };
 }

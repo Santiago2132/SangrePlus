@@ -65,4 +65,17 @@ export default class NuevaCitaTemplate {
             </form>
         `;
     };
+    showError = (message) => {
+        const errorDiv = document.getElementById('alerta-error');
+        if (errorDiv) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+    };
+    hideError = () => {
+        const errorDiv = document.getElementById('alerta-error');
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+        }
+    };
 }
