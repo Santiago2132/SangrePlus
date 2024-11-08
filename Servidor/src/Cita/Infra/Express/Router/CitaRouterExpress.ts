@@ -45,7 +45,7 @@ export default class CitaRouterExpress extends RouterExpress implements CitaRout
   }
   obtenerCitaId(): void {
     this.router.get(
-      '/parcial/citas/citaId/:id',
+      '/parcial/citas/citaId/',
       this.citaController.obtenerCitaId.bind(this.citaController)
     ) 
   }
