@@ -1,27 +1,42 @@
-import CambiarCitaTemplate from "../template/cambiarCitaTemplate.js";
+import CambiarCitaModel from "../model/cambiarCitaModel.js";
 import CambiarCitaView from "../view/cambiarCitaView.js";
 
-export default class cambiarCitaController { 
-    private nuevaCitaView: CambiarCitaView
-    constructor(){ 
-        this.nuevaCitaView = new CambiarCitaView(new CambiarCitaTemplate());
-    }
-    public init = (): void => {
-        this.render(); // Llamamos al método render cuando se inicializa el controlador
-    }
+export default class CambiarCitaController {
+    private model: CambiarCitaModel;
+    private view: CambiarCitaView;
 
+    constructor() {
+        this.model = new CambiarCitaModel();
+        this.view = new CambiarCitaView();
 
-
-    // Método para renderizar la vista principal
-    public render = (): void => {
-        // Asegurarse de que el DOM está completamente cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar la vista para que se renderice en el div con el ID 'main'
-            this.nuevaCitaView.init().then(() => {
-                console.log('IndexView initialized and rendered.');
-            }).catch((error) => {
-                console.error('Error initializing IndexView:', error);
-            });
+        // Asignar el evento para buscar una cita
+        document.addEventListener('buscarCita', (event: any) => {
+            this.buscarCita(event.detail);
         });
+
+        // Asignar el evento para cambiar la cita
+        document.addEventListener('cambiarCita', (event: any) => {
+            this.cambiarCita(event.detail);
+        });
+    }
+
+    public init(): void {
+        this.view.render();
+    }
+
+    private buscarCita(numeroCita: string): void {
+        const cita = this.model.consultarCita(numeroCita);
+
+        if (cita) {
+            this.view.mostrarCita(cita);
+        } else {
+            alert(`No se encontró la cita con el número ${numeroCita}`);
+        }
+    }
+
+    private cambiarCita(nuevosDatos: Record<string, string | undefined>): void {
+        const mensaje = this.model.cambiarCita(1, nuevosDatos); // Aquí deberías agregar la lógica para obtener el ID adecuado
+        alert(mensaje);
+        this.view.mostrarMensajeExito();
     }
 }

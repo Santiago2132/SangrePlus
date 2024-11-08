@@ -371,3 +371,29 @@ button[type="submit"]:hover {
 .cancelar-cita-button:hover {
     background-color: #e63946;
 }
+#mensaje-cambio {
+    display: none; /* Mantener oculto por defecto */
+    color: #4CAF50; /* Verde claro */
+    font-weight: bold;
+    background-color: #f9f9f9; /* Fondo blanco */
+    border: 2px solid #4CAF50; /* Borde verde claro */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrar texto */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+}
+
+/* Estilo responsivo */
+@media (max-width: 600px) {
+    #mensaje-cambio {
+        font-size: 16px; /* Tamaño de fuente más grande en pantallas pequeñas */
+        padding: 15px; /* Más espaciado interno en pantallas pequeñas */
+    }
+}
+
+@media (min-width: 601px) {
+    #mensaje-cambio {
+        font-size: 14px; /* Tamaño de fuente normal en pantallas grandes */
+        padding: 10px; /* Espaciado interno normal en pantallas grandes */
+    }
+}

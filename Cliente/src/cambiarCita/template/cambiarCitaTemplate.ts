@@ -1,6 +1,6 @@
 export default class CambiarCitaTemplate {
     constructor() {
-        console.log('NuevaCitaTemplate constructor');
+        console.log('NuevaCitaTemplate constructor'); 
     }
 
     public getHTML = (): string => {
@@ -35,11 +35,8 @@ export default class CambiarCitaTemplate {
                     <label for="identificacion">Identificación:</label>
                     <div id="idee">
                         <select id="tipo-identificacion" name="tipo-identificacion" required>
-                        <div id="identiti">
                             <option value="TI">T. I.</option>
                             <option value="CI">C. I.</option>
-                        </div>
-                        
                         </select>
                         <input type="text" id="identificacion" name="identificacion" required>
                     </div>
@@ -74,6 +71,10 @@ export default class CambiarCitaTemplate {
                 </div>
                 <div class="full-width">
                     <button type="submit">Agendar Cita</button>
+                </div>
+
+                <div id="mensaje-cambio" style="display:none; color: green; font-weight: bold;">
+                    ¡Tu cita fue cambiada exitosamente!
                 </div>
             </form>
         `;
