@@ -8,7 +8,7 @@ export default class DatabaseConexion {
             user: 'postgres',
             host: 'localhost',
             database: 'sangreplus',
-            //password: 'santiago',
+              //password: 'santiago',
             password: 'karen',
             port: 5432,
         });
