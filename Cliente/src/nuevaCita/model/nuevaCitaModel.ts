@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-
+ 
 export default class NuevaCitaModel {
     private citas: Array<{
         nombres: string;
