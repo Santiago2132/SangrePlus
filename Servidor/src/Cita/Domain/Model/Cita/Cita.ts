@@ -1,5 +1,4 @@
 import Cliente from "../../../../Cliente/Domain/Model/Cliente/Cliente";
-import Turno from "../../../../Turno/Domain/Model/Turno/Turno";
 
 export interface CitaInterface {
     id: number;

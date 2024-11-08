@@ -1,4 +1,3 @@
-import CitaInterface from "./Cita"; 
 import Cliente from "../../../../Cliente/Domain/Model/Cliente/Cliente";
 import NullCliente from "../../../../Cliente/Domain/Model/Cliente/NullCliente";
 import Cita from "./Cita";

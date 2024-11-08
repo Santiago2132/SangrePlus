@@ -1,3 +1,4 @@
+import RepositoryCliente from "../../../Cliente/Infra/repo/RepositoryCliente";
 import Cita from "../../Domain/Model/Cita/Cita";
 import CitaInterface from "../../Domain/Model/Cita/Cita";
 import NullCita from "../../Domain/Model/Cita/NullCita";
@@ -7,7 +8,9 @@ import CitaServicePort from "../../Domain/Port/Driver/CitaServicePort";
 
 export default class CitaService implements CitaServicePort {
     
-    constructor(private readonly repositoryCita: CitaRepositoryPort) {}
+    constructor(private readonly repositoryCita: CitaRepositoryPort,
+            private readonly repositoryClient: RepositoryCliente
+    ) {}
 
   // Obtener una cita por ID
     public getCitaById = async (id: number): Promise<Cita> => {
@@ -22,7 +25,17 @@ export default class CitaService implements CitaServicePort {
   // Agregar una nueva cita
     public agregarCita = async (cita: Cita): Promise<Cita> => {
         try {
+            console.log("Datos del cliente:", cita.cliente);
+        
+            // Guardando el cliente si es necesario (puede que tu lógica deba verificar si el cliente existe o no)
+            const clienteGuardado = await this.repositoryClient.save(cita.cliente);
+            console.log("Cliente guardado:", clienteGuardado);
+    
+            // Luego, guardamos la cita
             const nuevaCita = await this.repositoryCita.save(cita); // Usando el repositorio para guardar la cita
+            console.log("Cita guardada:", nuevaCita);
+            
+            // Retornamos la nueva cita guardada
             return nuevaCita;
         } catch (error) {
             console.log(`Error al agregar la cita: ${error}`);
@@ -49,11 +62,13 @@ export default class CitaService implements CitaServicePort {
     // Editar una cita existente
     public editarCita = async (cita: Cita): Promise<Cita> => {
         try {
-        const updatedCita = await this.repositoryCita.update(cita.id, cita); // Usando el repositorio para actualizar la cita
-        if (!updatedCita) {
-            throw new Error(`No se pudo actualizar la cita con ID ${cita.id}`);
-        }
-        return updatedCita;
+            const clienteGuardado = await this.repositoryClient.update(cita.cliente.id,cita.cliente);
+            console.log("Cliente guardado:", clienteGuardado);
+            const updatedCita = await this.repositoryCita.update(cita.id, cita); // Usando el repositorio para actualizar la cita
+            if (!updatedCita) {
+                throw new Error(`No se pudo actualizar la cita con ID ${cita.id}`);
+            }
+            return updatedCita;
         } catch (error) {
         throw new Error(`Error al editar la cita: ${error}`);
         }
@@ -62,8 +77,7 @@ export default class CitaService implements CitaServicePort {
     // Buscar citas por cliente
     public buscarCitaPorCliente = async (clienteId: number): Promise<Cita> => {
         try {
-        const cita = await this.repositoryCita.findCita(clienteId); // Supongo que se debe filtrar las citas por cliente
-        return cita; // Filtrando por clienteId
+            return new NullCita()
         } catch (error) {
         throw new Error(`Error al buscar citas para el cliente con ID ${clienteId}: ${error}`);
         }

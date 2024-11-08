@@ -1,7 +1,7 @@
 export default interface DBCitaPort {
     id: number;
     tipocita: string;
-    cliente_id?: number;
+    cliente_id: number;
     fecha: string;
     hora: string;
     descripcion: string;

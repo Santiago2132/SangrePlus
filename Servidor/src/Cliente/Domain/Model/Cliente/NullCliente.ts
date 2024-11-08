@@ -19,28 +19,10 @@ export default class NullCliente extends Cliente {
         return true;
     }
 
-    // Sobreescribimos los métodos "set" para no hacer nada
-    setId(value: number): void {
-        // No hace nada, ya que es un cliente nulo
-    }
-
-    setNombre(value: string): void {
-        // No hace nada, ya que es un cliente nulo
-    }
-
-    setApellido(value: string): void {
-        // No hace nada, ya que es un cliente nulo
-    }
-
-    setTipo(value: string): void {
-        // No hace nada, ya que es un cliente nulo
-    }
-
-    setHistorial(value: number): void {
-        // No hace nada, ya que es un cliente nulo
-    }
-
-    setEdad(value: number): void {
-        // No hace nada, ya que es un cliente nulo
-    }
+    public override setId = (_value: number): void => {};
+    public override setNombre = (_value: string): void => {};
+    public override setApellido = (_value: string): void => {};
+    public override setEdad = (_value: number): void => {};
+    public override setHistorial = (_value: number): void => {};
+    public override setTipo = (_value: string): void => {};
 }

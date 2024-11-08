@@ -11,15 +11,13 @@ export default class CitaRouterExpress extends RouterExpress implements CitaRout
   }
 
   public routes = (): void => {
-    this.getCitas()
+    this.obtenerCitas()
+    this.obtenerCitaId()
+    this.agregarCita()
+    this.cancelarCita()
+    this.modificarCita()
   }
 
-  public getCitas = (): void => {
-    this.router.get(
-      '/parcial/citas/cita',
-      this.citaController.obtenercitas.bind(this.citaController)
-    )
-  }
 
   obtenerCitas(): void {
     this.router.get(
@@ -28,27 +26,27 @@ export default class CitaRouterExpress extends RouterExpress implements CitaRout
     )  
   }
   agregarCita(): void {
-    this.router.get(
+    this.router.post(
       '/parcial/citas/agregar',
-      this.citaController.obtenercitas.bind(this.citaController)
+      this.citaController.agregarCita.bind(this.citaController)
     )   
   }
   modificarCita(): void {
-    this.router.get(
+    this.router.post(
       '/parcial/citas/modificar',
-      this.citaController.obtenercitas.bind(this.citaController)
+      this.citaController.modificarCita.bind(this.citaController)
     ) 
   }
   cancelarCita(): void {
-    this.router.get(
+    this.router.post(
       '/parcial/citas/cancelar',
-      this.citaController.obtenercitas.bind(this.citaController)
+      this.citaController.eliminarCita.bind(this.citaController)
     ) 
   }
   obtenerCitaId(): void {
     this.router.get(
-      '/parcial/citas/citaId',
-      this.citaController.obtenercitas.bind(this.citaController)
+      '/parcial/citas/citaId/:id',
+      this.citaController.obtenerCitaId.bind(this.citaController)
     ) 
   }
 
