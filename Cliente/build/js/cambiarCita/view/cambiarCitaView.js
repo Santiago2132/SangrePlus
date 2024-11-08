@@ -47,11 +47,46 @@ export default class CambiarCitaView {
         };
     }
     mostrarCita(cita) {
-        const mensaje = `Cita encontrada: ${cita.descripcion} (Número de cita: ${cita.numeroCita})`;
-        alert(mensaje);
+        console.log('Cita interface', cita);
+        // Mostrar mensaje con los detalles de la cita
+        const mensaje = `
+            Cita encontrada:
+            <br>Descripción: ${cita.descripcion}
+            <br>Número de cita: ${cita.id}
+            <br>Cliente: ${cita.cliente.nombre} ${cita.cliente.apellido}
+        `;
+        // Obtener el contenedor de mensaje
+        const mensajeCambioElement = document.getElementById('mensaje-cambio');
+        if (mensajeCambioElement) {
+            mensajeCambioElement.innerHTML = mensaje; // Aquí manipulamos el innerHTML
+            mensajeCambioElement.style.display = 'block'; // Mostrar el mensaje
+        }
+        else {
+            console.error('No se encontró el elemento #mensaje-cambio en el DOM');
+        }
     }
     mostrarMensajeExito() {
         const mensajeExito = document.getElementById('mensaje-cambio');
         mensajeExito.style.display = 'block';
+    }
+    cargarDatosCita(cita) {
+        // Llenamos los campos del formulario con los datos de la cita
+        document.getElementById('numero-cita').value = cita.id.toString(); // Asumiendo que el id es el número de cita
+        document.getElementById('descripcion').value = cita.descripcion;
+        document.getElementById('tipo-cita').value = cita.tipocita;
+        document.getElementById('fecha').value = this.formatearFecha(cita.fecha);
+        document.getElementById('hora').value = cita.hora;
+        document.getElementById('lugar').value = cita.lugar;
+        // Asumiendo que el cliente está relacionado con la cita
+        const cliente = cita.cliente;
+        document.getElementById('nombres').value = cliente.nombre;
+        document.getElementById('apellidos').value = cliente.apellido;
+        document.getElementById('edad').value = cliente.edad.toString();
+        // Ahora se pasa el objeto completo de la cita al método mostrarCita
+        this.mostrarCita(cita);
+    }
+    formatearFecha(fecha) {
+        const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        return fecha.toLocaleDateString('en-CA', opciones); // Formato YYYY-MM-DD
     }
 }

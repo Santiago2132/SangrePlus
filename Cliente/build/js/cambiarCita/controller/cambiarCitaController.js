@@ -20,12 +20,26 @@ export default class CambiarCitaController {
     }
     buscarCita(numeroCita) {
         const cita = this.model.consultarCita(numeroCita);
-        if (cita) {
-            this.view.mostrarCita(cita);
+        console.log(cita);
+        if (cita && this.isValidCita(cita)) {
+            console.log(cita);
+            this.view.cargarDatosCita(cita); // Pasa el objeto completo de cita
+            this.view.mostrarCita(cita); // Ahora también pasa el objeto completo para mostrar la cita
         }
         else {
             alert(`No se encontró la cita con el número ${numeroCita}`);
         }
+    }
+    isValidCita(cita) {
+        return cita.id !== undefined &&
+            cita.tipocita !== undefined &&
+            cita.fecha instanceof Date &&
+            cita.hora !== undefined &&
+            cita.descripcion !== undefined &&
+            cita.cliente !== undefined &&
+            cita.lugar !== undefined &&
+            cita.estado !== undefined &&
+            cita.observaciones !== undefined;
     }
     cambiarCita(nuevosDatos) {
         const mensaje = this.model.cambiarCita(1, nuevosDatos); // Aquí deberías agregar la lógica para obtener el ID adecuado
