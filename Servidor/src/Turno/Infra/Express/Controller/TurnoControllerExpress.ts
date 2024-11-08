@@ -62,7 +62,7 @@ export default class TurnoControllerExpress implements TurnoControllerExpressPor
   // Modificar los turnos
   async modificarTurnos(req: Request, res: Response): Promise<void> {
     try {
-      const turnos = req.body; // Suponiendo que el cuerpo contiene los turnos a modificar
+      const {turnos} = req.body; // Suponiendo que el cuerpo contiene los turnos a modificar
       const result = await this.turnoUso.modificarTurnos(turnos);
       if (result) {
         res.status(200).json({ message: 'Turnos modificados con éxito' , data: result});
@@ -78,7 +78,7 @@ export default class TurnoControllerExpress implements TurnoControllerExpressPor
   // Eliminar un turno
   async eliminarTurno(req: Request, res: Response): Promise<void> {
     try {
-      const id = req.body; // Suponiendo que el cuerpo contiene los turnos a modificar
+      const {id} = req.body; // Suponiendo que el cuerpo contiene los turnos a modificar
       const result = await this.turnoUso.eliminarTurno(parseInt(id));
       if (result) {
         res.status(200).json({ message: 'Turno eliminado con éxito' , data: result});

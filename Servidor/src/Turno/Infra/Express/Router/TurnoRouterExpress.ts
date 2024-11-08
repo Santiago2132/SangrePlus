@@ -24,13 +24,13 @@ export default class TurnoRouterExpress extends RouterExpress implements TurnoRo
 
   getTurnoByIdCita(): void {
     this.router.get(
-      '/parcial/turnos/turnoCita/:id',
+      '/parcial/turnos/turnoCita/',
       this.turnoController.getTurnoByIdCita.bind(this.turnoController)
     )  
   }
   getTurnoByIdTurno(): void {
     this.router.get(
-      '/parcial/turnos/turnoId/:id',
+      '/parcial/turnos/turnoId/',
       this.turnoController.getTurnoByIdTurno.bind(this.turnoController)
     )
   }

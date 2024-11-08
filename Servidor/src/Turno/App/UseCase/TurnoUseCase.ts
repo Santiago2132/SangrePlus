@@ -78,7 +78,7 @@ export default class TurnoUseCase implements TurnoUseCasePort {
 
             // Modificar los números de los turnos según el orden de la lista
             listaOrdenada.forEach((turno, index) => {
-                turno.setNumero(index + 1); // Asignar el número secuencial (empezando desde 1)
+                turno.setNumero(index); // Asignar el número secuencial (empezando desde 1)
             });
     
             // Ahora la listaTurnos está ordenada, y puedes realizar cualquier operación adicional
@@ -109,7 +109,10 @@ export default class TurnoUseCase implements TurnoUseCasePort {
         // Función para generar el próximo número de turno para un tipo de cliente
         const generarNumeroTurno = (turnos: Turno[], prefijo: string): string => {
             // Número secuencial basado en la cantidad de turnos existentes
-            const siguienteNumero = turnos.length + 1;
+            let siguienteNumero = turnos.length;
+            if(turnos.length==1){
+                 siguienteNumero = turnos.length + 2;
+            }
     
             // Generar el turno con el número apropiado
             return `${prefijo}-${siguienteNumero}`;
@@ -154,7 +157,13 @@ export default class TurnoUseCase implements TurnoUseCasePort {
 
     async modificarTurnos(turnos: Turno[]): Promise<boolean> {
         try {
+            // Cambiar el número de cada turno según su posición en la lista
+            turnos.forEach((turno, index) => {
+                // Asignar el número de turno según la posición en la lista (index + 1)
+                turno.setNumero(index + 1); // Suponiendo que setNumero es un método de la clase Turno
+            });
             const resultado = await this.turnoService.modificarTurnos(turnos);
+            
             return resultado;
         } catch (error) {
             console.error('Error al modificar turnos:', error);

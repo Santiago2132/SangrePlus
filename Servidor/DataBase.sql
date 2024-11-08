@@ -22,7 +22,7 @@ CREATE TABLE turno (
     turno VARCHAR(255) NOT NULL,
     modulo VARCHAR(255) NOT NULL,
     numero INTEGER NOT NULL,
-    cita_id INTEGER REFERENCES cita(id) ON DELETE SET NULL
+    cita_id INTEGER REFERENCES cita(id) 
 );
 
 -- Creación de la tabla "cita"
@@ -34,6 +34,6 @@ CREATE TABLE cita (
     hora TIME NOT NULL,
     descripcion TEXT NOT NULL,
     lugar VARCHAR(255) NOT NULL,
-    estado VARCHAR(255) CHECK (estado IN ('pendiente', 'asistida', 'cancelada')) NOT NULL,
+    estado VARCHAR(255) NOT NULL,
     observaciones TEXT
 );
