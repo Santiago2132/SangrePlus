@@ -1,11 +1,11 @@
 import cancelarCitaView from "../view/cancelarCitaView.js";
-import cancelarCitaModel from "../model/cancelarCitaModel.js";
 import cancelarCitaTemplate from "../template/cancelarCitaTemplate.js";
+import CancelarCitaModel from "../model/cancelarCitaModel.js";
 export default class cancelarCitaController {
     cancelarCitaView;
     cancelarCitaModel;
     constructor() {
-        this.cancelarCitaModel = new cancelarCitaModel();
+        this.cancelarCitaModel = new CancelarCitaModel();
         this.cancelarCitaView = new cancelarCitaView(new cancelarCitaTemplate());
     }
     init = () => {
@@ -18,51 +18,57 @@ export default class cancelarCitaController {
         });
     };
     addEventListeners = () => {
-        const buscarCitaButton = document.getElementById("buscar-cita");
+        const buscarCitaButton = document.getElementById("buscar-cita-cancelar");
         if (buscarCitaButton) {
             buscarCitaButton.addEventListener("click", this.handleBuscarCita);
         }
         else {
             console.error("El botón 'Buscar Cita' no se encontró.");
         }
+        const confirmarCancelacionButton = document.getElementById("confirmar-cancelacion");
+        if (confirmarCancelacionButton) {
+            confirmarCancelacionButton.addEventListener("click", this.handleConfirmarCancelacion);
+        }
+        const cancelarCancelacionButton = document.getElementById("cancelar-cancelacion");
+        if (cancelarCancelacionButton) {
+            cancelarCancelacionButton.addEventListener("click", this.handleCancelarCancelacion);
+        }
     };
     handleBuscarCita = () => {
-        const numeroCita = document.getElementById("numero-cita").value.trim();
+        // Obtener el número de cita desde la vista
+        const numeroCita = this.cancelarCitaView.getNumeroCitaCancelar();
+        if (numeroCita === '') {
+            alert("Por favor, ingresa un número de cita válido.");
+            return;
+        }
+        // Llamar al modelo para buscar la cita
         const cita = this.cancelarCitaModel.buscarCita(numeroCita);
         if (cita) {
-            this.cancelarCitaView.showInfoPanel(`
-                <h3>Información de la Cita</h3>
-                <p><strong>Fecha:</strong> ${cita.fecha}</p>
-                <p><strong>Hora:</strong> ${cita.hora}</p>
-                <p><strong>Lugar:</strong> ${cita.lugar}</p>
-                <button id="cancelar-cita-button" class="cancelar-cita-button">Cancelar Cita</button>
-            `);
-            this.addEventListenersToCancelButton(); // Asignar evento al botón de cancelar
+            this.cancelarCitaView.showConfirmPanel(); // Mostrar panel de confirmación
         }
         else {
             alert("No existe una cita con ese número.");
         }
     };
-    addEventListenersToCancelButton = () => {
-        const cancelarCitaButton = document.getElementById("cancelar-cita-button");
-        if (cancelarCitaButton) {
-            cancelarCitaButton.addEventListener("click", this.handleCancelarCita);
+    handleConfirmarCancelacion = () => {
+        // Obtener el número de cita desde la vista
+        const numeroCita = this.cancelarCitaView.getNumeroCitaCancelar();
+        if (numeroCita === '') {
+            alert("Por favor, ingresa un número de cita válido.");
+            return;
         }
-        else {
-            console.error("El botón 'Cancelar Cita' no se encontró.");
-        }
-    };
-    handleCancelarCita = () => {
-        console.log("Intentando cancelar la cita..."); // Para verificar si se llama a la función
-        const numeroCita = document.getElementById("numero-cita").value.trim();
+        // Llamar al método cancelarCitaModel para cancelar la cita
         const citaCancelada = this.cancelarCitaModel.cancelarCita(numeroCita);
         if (citaCancelada) {
-            this.cancelarCitaView.showInfoPanel("<p>La cita ha sido cancelada con éxito.</p>");
-            // Reiniciar el campo de entrada
-            document.getElementById("numero-cita").value = '';
+            this.cancelarCitaView.hideConfirmPanel(); // Ocultar el panel de confirmación
+            alert(`La cita número ${numeroCita} ha sido cancelada con éxito.`); // Mostrar mensaje de éxito con el número de cita
+            document.getElementById("numero-cita-cancelar").value = ''; // Limpiar campo
         }
         else {
-            alert("No se pudo cancelar la cita. Verifica el número de cita.");
+            alert(`No se pudo cancelar la cita con número ${numeroCita}. Verifica el número de cita.`); // Mostrar error con el número de cita
         }
+    };
+    handleCancelarCancelacion = () => {
+        this.cancelarCitaView.hideConfirmPanel(); // Ocultar el panel de confirmación
     };
 }

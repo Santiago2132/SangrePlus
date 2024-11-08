@@ -10,23 +10,34 @@ export default class NuevaCitaView {
     }
     init = async () => {
         this.selector = document.getElementById(this.selectorName);
+        if (!this.selector) {
+            console.error(`No se encontró el contenedor con id ${this.selectorName}`);
+            return;
+        }
         setTimeout(() => {
             this.render();
         }, 100);
     };
     render = () => {
+        if (!this.selector)
+            return;
         this.selector.innerHTML = this.template.getHTML();
-        const form = document.getElementById('nueva-cita-form');
-        form.addEventListener('submit', (e) => this.handleSubmit(e));
+        const form = document.getElementById('form-nueva-cita');
+        if (form) {
+            form.addEventListener('submit', (e) => this.handleSubmit(e));
+        }
+        else {
+            console.error("Formulario 'form-nueva-cita' no encontrado en el template.");
+        }
     };
     handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const citaData = {
-            nombre: formData.get('nombres'),
-            apellido: formData.get('apellidos'),
+            nombres: formData.get('nombres'),
+            apellidos: formData.get('apellidos'),
             edad: formData.get('edad'),
-            id: formData.get('identificacion'),
+            identificacion: formData.get('identificacion'),
             tipoIdentificacion: formData.get('tipo-identificacion'),
             descripcion: formData.get('descripcion'),
             tipoCita: formData.get('tipo-cita'),
@@ -34,25 +45,25 @@ export default class NuevaCitaView {
             hora: formData.get('hora'),
             lugar: formData.get('lugar'),
         };
-        // Validación
         if (Object.values(citaData).some((value) => !value)) {
             this.template.showError("Por favor, completa todos los campos.");
         }
         else {
             this.template.hideError();
-            this.onSubmitCallback(citaData); // Llamar al callback con los datos de la cita
+            this.onSubmitCallback(citaData);
         }
     };
-    // Mostrar el ID de la cita generado
     showCitaId = (citaId) => {
-        const citaIdContainer = document.getElementById('cita-id-container');
+        const citaIdContainer = document.getElementById('div-cita-id-container');
         if (citaIdContainer) {
             citaIdContainer.textContent = `ID de la cita: ${citaId}`;
         }
     };
-    // Limpiar el formulario
     clearForm = () => {
-        const form = document.getElementById('nueva-cita-form');
+        const form = document.getElementById('form-nueva-cita');
         form.reset();
     };
+    showError(message) {
+        alert(message);
+    }
 }

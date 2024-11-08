@@ -1,6 +1,6 @@
 export default class cancelarCitaView {
     selector;
-    selectorName = 'cancelar'; // Asegúrate que este ID exista en tu HTML
+    selectorName = 'cancelar'; // Asegúrate de que este ID exista en tu HTML
     template;
     constructor(template) {
         this.selector = document.createElement("div");
@@ -18,20 +18,20 @@ export default class cancelarCitaView {
     render = () => {
         this.selector.innerHTML = this.template.getHTML();
     };
-    showInfoPanel = (content) => {
-        const infoCitaPanel = document.getElementById("info-cita-panel");
-        if (infoCitaPanel) {
-            infoCitaPanel.innerHTML = content;
-            infoCitaPanel.classList.remove("hidden");
-        }
-        else {
-            console.error('Info panel not found.');
+    showConfirmPanel = () => {
+        const confirmPanel = document.getElementById("confirm-cancel-panel");
+        if (confirmPanel) {
+            confirmPanel.classList.remove("hidden");
         }
     };
-    hideInfoPanel = () => {
-        const infoCitaPanel = document.getElementById("info-cita-panel");
-        if (infoCitaPanel) {
-            infoCitaPanel.classList.add("hidden");
+    hideConfirmPanel = () => {
+        const confirmPanel = document.getElementById("confirm-cancel-panel");
+        if (confirmPanel) {
+            confirmPanel.classList.add("hidden");
         }
+    };
+    // Nueva función para enviar el número de cita al controlador
+    getNumeroCitaCancelar = () => {
+        return document.getElementById("numero-cita-cancelar").value.trim();
     };
 }
