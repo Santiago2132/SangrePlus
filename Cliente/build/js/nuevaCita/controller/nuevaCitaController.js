@@ -20,10 +20,10 @@ export default class NuevaCitaController {
             });
         });
     };
-    handleCitaSubmission = (citaData) => {
+    handleCitaSubmission = async (citaData) => {
         console.log("Datos de la cita recibidos en el controlador:", citaData);
         if (this.validateCitaData(citaData)) {
-            const citaId = this.nuevaCitaModel.procesarCita(citaData);
+            const citaId = await this.nuevaCitaModel.procesarCita(citaData);
             this.nuevaCitaView.showCitaId(citaId);
             this.nuevaCitaView.clearForm();
         }
@@ -33,7 +33,7 @@ export default class NuevaCitaController {
         }
     };
     validateCitaData(citaData) {
-        return Boolean(citaData['identificacion']) && Boolean(citaData['nombres']) && Boolean(citaData['apellidos']) &&
+        return Boolean(citaData['id']) && Boolean(citaData['nombre']) && Boolean(citaData['apellido']) &&
             Boolean(citaData['edad']) && Boolean(citaData['fecha']) && Boolean(citaData['hora']);
     }
 }

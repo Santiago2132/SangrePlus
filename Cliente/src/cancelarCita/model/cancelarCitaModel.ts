@@ -60,18 +60,61 @@ export default class CancelarCitaModel {
     ];
 
     // Método para buscar una cita por número
-    public buscarCita(numeroCita: string): CitaInterface | undefined {
-        console.log(numeroCita)
-        return this.citas.find(cita => cita.id.toString() === numeroCita);
+    public async buscarCita(numeroCita: string): Promise<CitaInterface | undefined> {
+        const cita = await this.getCitaByNumero(parseInt(numeroCita)) 
+        return cita
+    }
+
+    
+      // Método para obtener una cita por su número
+    public async getCitaByNumero(id: number): Promise<CitaInterface> {
+        console.log(id)
+        const response = await fetch(`http://localhost:3000/parcial/citas/citaId/?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        console.log(await response.json)
+        if (!response.ok) {
+            console.log('error en el server')
+        }
+        const mensaje= await response.json()
+        console.log(mensaje.data)
+    
+        return mensaje.data
+
     }
 
     // Método para cancelar una cita por número
-    public cancelarCita(numeroCita: string): boolean {
+    public async cancelarCita(numeroCita: string): Promise<boolean> {/*
         const citaIndex = this.citas.findIndex(cita => cita.id.toString() === numeroCita);
         if (citaIndex >= 0) {
             this.citas.splice(citaIndex, 1);  // Simulamos la eliminación eliminando de la lista interna
             return true;
         }
-        return false;
+        return false;*/
+        console.log(numeroCita +' para cancelar')
+        return await this.cancelarCitaFetch(numeroCita)
+    }
+
+
+
+    public async cancelarCitaFetch(numerocita: string): Promise<boolean> {
+        const response = await fetch(`http://localhost:3000/parcial/citas/cancelar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: parseInt(numerocita) }),
+        })
+            if (!response.ok) {
+                console.log('error en el server')
+                return false
+            }
+            else{
+                return true
+            }
+
     }
 }

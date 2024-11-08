@@ -33,11 +33,12 @@ export default class NuevaCitaView {
     handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
+        console.log(formData);
         const citaData = {
-            nombres: formData.get('nombres'),
-            apellidos: formData.get('apellidos'),
+            nombre: formData.get('nombres'),
+            apellido: formData.get('apellidos'),
             edad: formData.get('edad'),
-            identificacion: formData.get('identificacion'),
+            id: formData.get('identificacion'),
             tipoIdentificacion: formData.get('tipo-identificacion'),
             descripcion: formData.get('descripcion'),
             tipoCita: formData.get('tipo-cita'),

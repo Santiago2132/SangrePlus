@@ -81,7 +81,7 @@ export default class CambiarCitaView {
         // Mostrar mensaje con los detalles de la cita
         const mensaje = `
             Cita encontrada:
-            <br>Descripción: ${cita.descripcion}
+            <br>Descripción: ${cita.observaciones}
             <br>Número de cita: ${cita.id}
             <br>Cliente: ${cita.cliente.nombre} ${cita.cliente.apellido}
         `;
@@ -106,7 +106,7 @@ export default class CambiarCitaView {
     public cargarDatosCita(cita: CitaInterface): void {
         // Llenamos los campos del formulario con los datos de la cita
         (document.getElementById('numero-cita') as HTMLInputElement).value = cita.id.toString(); // Asumiendo que el id es el número de cita
-        (document.getElementById('descripcion') as HTMLTextAreaElement).value = cita.descripcion;
+        (document.getElementById('descripcion') as HTMLTextAreaElement).value = cita.observaciones;
         (document.getElementById('tipo-cita') as HTMLSelectElement).value = cita.tipocita;
         (document.getElementById('fecha') as HTMLInputElement).value = this.formatearFecha(cita.fecha);
         (document.getElementById('hora') as HTMLInputElement).value = cita.hora;

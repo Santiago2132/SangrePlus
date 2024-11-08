@@ -31,13 +31,13 @@ export default class CambiarCitaController {
         this.view = new CambiarCitaView();
 
         // Asignar el evento para buscar una cita
-        document.addEventListener('buscarCita', (event: any) => {
-            this.buscarCita(event.detail);
+        document.addEventListener('buscarCita', async(event: any) => {
+           await  this.buscarCita(event.detail);
         });
 
         // Asignar el evento para cambiar la cita
-        document.addEventListener('cambiarCita', (event: any) => {
-            this.cambiarCita(event.detail);
+        document.addEventListener('cambiarCita', async(event: any) => {
+            await this.cambiarCita(event.detail);
         });
     }
 
@@ -45,10 +45,10 @@ export default class CambiarCitaController {
         this.view.render();
     }
 
-    private buscarCita(numeroCita: string): void {
-        const cita = this.model.consultarCita(numeroCita) as CitaInterface | null;
+    private async buscarCita(numeroCita: string): Promise<void> {
+        const cita = await this.model.consultarCita(numeroCita) as CitaInterface | null;
         console.log(cita);
-        if (cita && this.isValidCita(cita)) {
+        if (cita) {
             console.log(cita);
             this.view.cargarDatosCita(cita); // Pasa el objeto completo de cita
             this.view.mostrarCita(cita); // Ahora también pasa el objeto completo para mostrar la cita
@@ -70,9 +70,9 @@ export default class CambiarCitaController {
                cita.observaciones !== undefined;
     }
 
-    private cambiarCita(nuevosDatos: Record<string, string | undefined>): void {
-        const mensaje = this.model.cambiarCita(1, nuevosDatos); // Aquí deberías agregar la lógica para obtener el ID adecuado
+    private async cambiarCita(nuevosDatos: Record<string, string | undefined>): Promise<void> {
+        const mensaje = await this.model.cambiarCita(1, nuevosDatos); // Aquí deberías agregar la lógica para obtener el ID adecuado
         alert(mensaje);
-        this.view.mostrarMensajeExito();
+        await this.view.mostrarMensajeExito();
     }
 }

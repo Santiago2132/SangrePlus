@@ -17,24 +17,24 @@ export default class cancelarCitaController {
             });
         });
     };
-    addEventListeners = () => {
+    addEventListeners = async () => {
         const buscarCitaButton = document.getElementById("buscar-cita-cancelar");
         if (buscarCitaButton) {
-            buscarCitaButton.addEventListener("click", this.handleBuscarCita);
+            buscarCitaButton.addEventListener("click", await this.handleBuscarCita);
         }
         else {
             console.error("El botón 'Buscar Cita' no se encontró.");
         }
         const confirmarCancelacionButton = document.getElementById("confirmar-cancelacion");
         if (confirmarCancelacionButton) {
-            confirmarCancelacionButton.addEventListener("click", this.handleConfirmarCancelacion);
+            confirmarCancelacionButton.addEventListener("click", await this.handleConfirmarCancelacion);
         }
         const cancelarCancelacionButton = document.getElementById("cancelar-cancelacion");
         if (cancelarCancelacionButton) {
-            cancelarCancelacionButton.addEventListener("click", this.handleCancelarCancelacion);
+            cancelarCancelacionButton.addEventListener("click", await this.handleCancelarCancelacion);
         }
     };
-    handleBuscarCita = () => {
+    handleBuscarCita = async () => {
         // Obtener el número de cita desde la vista
         const numeroCita = this.cancelarCitaView.getNumeroCitaCancelar();
         if (numeroCita === '') {
@@ -42,7 +42,7 @@ export default class cancelarCitaController {
             return;
         }
         // Llamar al modelo para buscar la cita
-        const cita = this.cancelarCitaModel.buscarCita(numeroCita);
+        const cita = await this.cancelarCitaModel.buscarCita(numeroCita);
         if (cita) {
             this.cancelarCitaView.showConfirmPanel(); // Mostrar panel de confirmación
         }
@@ -50,15 +50,16 @@ export default class cancelarCitaController {
             alert("No existe una cita con ese número.");
         }
     };
-    handleConfirmarCancelacion = () => {
+    handleConfirmarCancelacion = async () => {
         // Obtener el número de cita desde la vista
         const numeroCita = this.cancelarCitaView.getNumeroCitaCancelar();
+        console.log(numeroCita + 'en controller');
         if (numeroCita === '') {
             alert("Por favor, ingresa un número de cita válido.");
             return;
         }
         // Llamar al método cancelarCitaModel para cancelar la cita
-        const citaCancelada = this.cancelarCitaModel.cancelarCita(numeroCita);
+        const citaCancelada = await this.cancelarCitaModel.cancelarCita(numeroCita);
         if (citaCancelada) {
             this.cancelarCitaView.hideConfirmPanel(); // Ocultar el panel de confirmación
             alert(`La cita número ${numeroCita} ha sido cancelada con éxito.`); // Mostrar mensaje de éxito con el número de cita

@@ -9,7 +9,7 @@ export default class NuevaCitaController {
     constructor() {
         const template = new NuevaCitaTemplate();
         this.nuevaCitaModel = new NuevaCitaModel();
-        this.nuevaCitaView = new NuevaCitaView(template, this.handleCitaSubmission);
+        this.nuevaCitaView = new NuevaCitaView(template,  this.handleCitaSubmission);
     }
 
     public init = (): void => {
@@ -24,11 +24,11 @@ export default class NuevaCitaController {
         });
     }
 
-    private handleCitaSubmission = (citaData: Record<string, string | undefined>): void => {
+    private  handleCitaSubmission = async(citaData: Record<string, string | undefined>): Promise<void> => {
         console.log("Datos de la cita recibidos en el controlador:", citaData);
 
         if (this.validateCitaData(citaData)) {
-            const citaId: string = this.nuevaCitaModel.procesarCita(citaData);
+            const citaId: string = await  this.nuevaCitaModel.procesarCita(citaData);
             this.nuevaCitaView.showCitaId(citaId);
             this.nuevaCitaView.clearForm();
         } else {
@@ -38,7 +38,7 @@ export default class NuevaCitaController {
     }
 
     private validateCitaData(citaData: Record<string, string | undefined>): boolean {
-        return Boolean(citaData['identificacion']) && Boolean(citaData['nombres']) && Boolean(citaData['apellidos']) &&
+        return Boolean(citaData['id']) && Boolean(citaData['nombre']) && Boolean(citaData['apellido']) &&
                Boolean(citaData['edad']) && Boolean(citaData['fecha']) && Boolean(citaData['hora']);
     }
 }

@@ -59,51 +59,14 @@ let baseDeCitas: CitaInterface[] = [
 ];
 
 export default class CambiarCitaModel {
-    private citas: CitaInterface[] = [
-        {
-            id: 123,
-            tipocita: "Consulta general",
-            fecha: new Date('2024-11-10'),
-            hora: "10:00",
-            descripcion: "Chequeo de rutina",
-            cliente: {
-                id: 101,
-                nombre: "Juan",
-                apellido: "Pérez",
-                edad: 30,
-                historial: 123456,
-                tipo: "Regular"
-            },
-            lugar: "Clínica A",
-            estado: "Programada",
-            observaciones: "Sin observaciones"
-        },
-        {
-            id: 456,
-            tipocita: "Seguimiento de tratamiento",
-            fecha: new Date('2024-11-15'),
-            hora: "14:00",
-            descripcion: "Revisión de tratamiento post-quirúrgico",
-            cliente: {
-                id: 102,
-                nombre: "María",
-                apellido: "González",
-                edad: 40,
-                historial: 654321,
-                tipo: "Urgente"
-            },
-            lugar: "Clínica B",
-            estado: "Programada",
-            observaciones: "Paciente con antecedentes familiares"
-        }
-    ];
+
     constructor() {
         console.log('Constructor de CambiarCitaModel');
     }
 
     // Método para cambiar los datos de una cita
-    public cambiarCita(idCita: number, nuevosDatos: Record<string, string | undefined>): string {
-        const cita = baseDeCitas.find(c => c.id === idCita);
+    public async cambiarCita(idCita: number, nuevosDatos: Record<string, string | undefined>): Promise<string> {
+        const cita = await this.getCitaByNumero(idCita) 
         
         if (!cita) {
             return `Cita con ID ${idCita} no encontrada.`;
@@ -124,13 +87,57 @@ export default class CambiarCitaModel {
         }
 
         console.log('Cita actualizada:', JSON.stringify(cita, null, 2));
+        const citaMod=await this.modificarCita(cita)
+        console.log(citaMod)
         return `Cita con ID ${idCita} actualizada correctamente.`;
     }
 
+
+    // Método para actualizar una cita 
+    public async modificarCita(updatedCita: CitaInterface):Promise<boolean> {
+        const response = await fetch(`http://localhost:3000/parcial/citas/modificar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCita),
+        })
+        if (!response.ok) {
+            console.log('error en el server')
+        }
+        const mensaje= await response.json()
+        console.log(mensaje.data)
+    
+        return mensaje.data
+    }
+
+
+      // Método para obtener una cita por su número
+    public async getCitaByNumero(id: number): Promise<CitaInterface> {
+        console.log(id)
+        const response = await fetch(`http://localhost:3000/parcial/citas/citaId/?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        console.log(response.json)
+        if (!response.ok) {
+            console.log('error en el server')
+        }
+        const mensaje= await response.json()
+        console.log(mensaje.data)
+    
+        return mensaje.data
+
+    }
+
+
+
     // Método para imprimir una cita por ID
-    public imprimirCita(idCita: number): string {
-        const cita = baseDeCitas.find(c => c.id === idCita);
-        
+    public async imprimirCita(idCita: number): Promise<string> {
+        const cita=  await this.getCitaByNumero((idCita)) 
+
         if (!cita) {
             return `Cita con ID ${idCita} no encontrada.`;
         }
@@ -141,9 +148,9 @@ export default class CambiarCitaModel {
     
     // Método para consultar una cita en la lista privada `citas`
     // Método para consultar una cita en `baseDeCitas` y devolver el objeto completo de tipo `CitaInterface`
-    public consultarCita(numeroCita: string): CitaInterface | null {
-        const cita = this.citas.find(c => c.id === parseInt(numeroCita));
-        return cita || null;
+    public async consultarCita(numeroCita: string): Promise<CitaInterface | null> {
+        return  await this.getCitaByNumero(parseInt(numeroCita)) 
+
     }
 
     

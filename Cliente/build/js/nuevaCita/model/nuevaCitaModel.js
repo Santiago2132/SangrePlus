@@ -5,7 +5,7 @@ export default class NuevaCitaModel {
         return Math.floor(Math.random() * 1000); // Genera un ID aleatorio
     }
     // Método para procesar la cita
-    procesarCita(citaData) {
+    async procesarCita(citaData) {
         // Verificamos los datos recibidos
         console.log("Datos recibidos para procesar la cita:", citaData);
         // Creamos el cliente
@@ -14,8 +14,8 @@ export default class NuevaCitaModel {
             nombre: citaData['nombre'] ?? 'No proporcionado', // Si no se proporciona, usamos 'No proporcionado'
             apellido: citaData['apellido'] ?? 'No proporcionado', // Igual para apellido
             edad: citaData['edad'] ? parseInt(citaData['edad']) : 0, // Edad proporcionada o 0
-            historial: citaData['identificacion'] ? parseInt(citaData['identificacion']) : 0, // Identificación o 0
-            tipo: citaData['tipo'] ?? 'Regular', // Tipo por defecto 'Regular' si no se proporciona
+            historial: 0, //  0
+            tipo: citaData['tipo'] ?? 'no premium', // Tipo por defecto 'Regular' si no se proporciona
         };
         // Imprimimos el cliente para verificar que está armado correctamente
         console.log("Cliente creado:", clienteDePrueba);
@@ -28,12 +28,30 @@ export default class NuevaCitaModel {
             descripcion: citaData['descripcion'] ?? 'No especificada', // Descripción proporcionada o por defecto
             cliente: clienteDePrueba, // Asociamos el cliente previamente creado
             lugar: citaData['lugar'] ?? 'No especificado', // Lugar de la cita
-            estado: 'Programada', // Estado por defecto 'Programada'
+            estado: 'pendiente', // Estado por defecto 'Programada'
             observaciones: citaData['observaciones'] ?? 'Sin observaciones', // Observaciones si se proporcionan, si no, 'Sin observaciones'
         };
         // Imprimimos la cita para verificar que está correctamente procesada
         console.log("Cita procesada:", JSON.stringify(citaDePrueba, null, 2));
+        const cita = await this.agregarNuevaCita(citaDePrueba);
+        console.log(cita);
         // Retornamos el ID de la cita como string
         return citaDePrueba.id.toString();
+    }
+    // Método para actualizar una cita 
+    async agregarNuevaCita(updatedCita) {
+        const response = await fetch(`http://localhost:3000/parcial/citas/agregar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCita),
+        });
+        if (!response.ok) {
+            console.log('error en el server');
+        }
+        const mensaje = await response.json();
+        console.log(mensaje.data);
+        return mensaje.data;
     }
 }

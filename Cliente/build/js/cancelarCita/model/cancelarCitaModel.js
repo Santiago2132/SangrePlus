@@ -38,17 +38,46 @@ export default class CancelarCitaModel {
         }
     ];
     // Método para buscar una cita por número
-    buscarCita(numeroCita) {
-        console.log(numeroCita);
-        return this.citas.find(cita => cita.id.toString() === numeroCita);
+    async buscarCita(numeroCita) {
+        const cita = await this.getCitaByNumero(parseInt(numeroCita));
+        return cita;
+    }
+    // Método para obtener una cita por su número
+    async getCitaByNumero(id) {
+        console.log(id);
+        const response = await fetch(`http://localhost:3000/parcial/citas/citaId/?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log(await response.json);
+        if (!response.ok) {
+            console.log('error en el server');
+        }
+        const mensaje = await response.json();
+        console.log(mensaje.data);
+        return mensaje.data;
     }
     // Método para cancelar una cita por número
-    cancelarCita(numeroCita) {
-        const citaIndex = this.citas.findIndex(cita => cita.id.toString() === numeroCita);
-        if (citaIndex >= 0) {
-            this.citas.splice(citaIndex, 1); // Simulamos la eliminación eliminando de la lista interna
+    async cancelarCita(numeroCita) {
+        console.log(numeroCita + ' para cancelar');
+        return await this.cancelarCitaFetch(numeroCita);
+    }
+    async cancelarCitaFetch(numerocita) {
+        const response = await fetch(`http://localhost:3000/parcial/citas/cancelar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: parseInt(numerocita) }),
+        });
+        if (!response.ok) {
+            console.log('error en el server');
+            return false;
+        }
+        else {
             return true;
         }
-        return false;
     }
 }
