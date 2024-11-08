@@ -1,12 +1,11 @@
 import NuevaCitaTemplate from "../template/nuevaCitaTemplate.js";
-
 export default class NuevaCitaView {
     private selector: HTMLDivElement;
     private selectorName = 'nueva';
     private template: NuevaCitaTemplate;
-    private onSubmitCallback: (citaData: Record<string, string>) => void;
+    private onSubmitCallback: (citaData: Record<string, string | undefined>) => void;
 
-    constructor(template: NuevaCitaTemplate, onSubmitCallback: (citaData: Record<string, string>) => void) {
+    constructor(template: NuevaCitaTemplate, onSubmitCallback: (citaData: Record<string, string | undefined>) => void) {
         this.selector = document.createElement('div');
         this.template = template;
         this.onSubmitCallback = onSubmitCallback;
@@ -39,7 +38,9 @@ export default class NuevaCitaView {
     private handleSubmit = (e: Event): void => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
-        const citaData = {
+
+        // Aquí tomamos los valores del formulario y los pasamos como un objeto
+        const citaData: Record<string, string | undefined> = {
             nombres: formData.get('nombres') as string,
             apellidos: formData.get('apellidos') as string,
             edad: formData.get('edad') as string,
@@ -56,7 +57,7 @@ export default class NuevaCitaView {
             this.template.showError("Por favor, completa todos los campos.");
         } else {
             this.template.hideError();
-            this.onSubmitCallback(citaData);
+            this.onSubmitCallback(citaData); // Pasamos la data del formulario al controlador
         }
     }
 

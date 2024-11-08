@@ -33,6 +33,7 @@ export default class NuevaCitaView {
     handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
+        // Aquí tomamos los valores del formulario y los pasamos como un objeto
         const citaData = {
             nombres: formData.get('nombres'),
             apellidos: formData.get('apellidos'),
@@ -50,7 +51,7 @@ export default class NuevaCitaView {
         }
         else {
             this.template.hideError();
-            this.onSubmitCallback(citaData);
+            this.onSubmitCallback(citaData); // Pasamos la data del formulario al controlador
         }
     };
     showCitaId = (citaId) => {
