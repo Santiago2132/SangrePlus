@@ -28,20 +28,48 @@ export default class cNoAsistidasModel {
             { id: 6, nombre: "Pedro", apellido: "González", edad: 60, tipo: "no premium", historial: 4 }
         ];
     }
-    getCitasNoAsistidas() {
-        console.log('Filtrando citas asistidas...');
-        const citasAsistidas = this.turnosData.map(turno => {
-            const cita = this.citasData.find(c => c.id === turno.cita_id);
-            const cliente = cita ? this.clientesData.find(cl => cl.id === cita.cliente_id) : null;
-            return {
-                cita_num: turno.cita_num,
-                cita: cita ? {
+    async getCitasNoAsistidas() {
+        console.log('Filtrando citas no asistidas...');
+        // Obtener las citas asistidas desde la fuente de datos
+        const citasData = await this.asistidas();
+        // Si no hay citas, retornar un array vacío
+        if (!citasData || citasData.length === 0) {
+            console.log('No se encontraron citas.');
+            return [];
+        }
+        console.log(citasData);
+        // Crear un mapa para una búsqueda más eficiente de citas por cita_id
+        const citasMap = new Map(citasData.map(cita => [cita.id, cita]));
+        // Filtrar turnos y buscar citas asistidas
+        // Filtrar solo las citas que están 'asistidas'
+        const citasAsistidas = citasData
+            .filter(cita => cita.estado === 'no-asistida') // Filtrar citas con estado 'asistida'
+            .map(cita => ({
+            cita_num: cita.id,
+            cita: cita
+                ? {
                     ...cita,
-                    cliente: cliente ? { nombre: cliente.nombre, apellido: cliente.apellido } : null
-                } : null
-            };
-        }).filter(turno => turno.cita?.estado === 'no-asistida'); // Filtrar solo las citas asistidas
+                    cliente: cita.cliente
+                        ? { nombre: cita.cliente.nombre, apellido: cita.cliente.apellido }
+                        : null,
+                }
+                : null,
+        }));
         console.log('Citas asistidas filtradas:', citasAsistidas);
         return citasAsistidas;
+    }
+    async asistidas() {
+        const response = await fetch(`http://localhost:3000/parcial/citas/cita`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            console.log('error en el server');
+        }
+        const mensaje = await response.json();
+        console.log(mensaje.data);
+        return mensaje.data;
     }
 }

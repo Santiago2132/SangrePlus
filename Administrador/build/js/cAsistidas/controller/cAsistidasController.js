@@ -12,8 +12,8 @@ export default class cAsistidasController {
         console.log("Citas asistidas Controller iniciado");
         this.render();
     }
-    render() {
-        const citasAsistidas = this.model.getCitasAsistidas();
+    async render() {
+        const citasAsistidas = await this.model.getCitasAsistidas();
         this.view.render(citasAsistidas);
     }
 }

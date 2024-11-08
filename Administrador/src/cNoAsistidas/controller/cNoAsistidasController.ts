@@ -17,8 +17,8 @@ export default class cNoAsistidasController {
         this.render();
     }
 
-    private render() {
-        const citasAsistidas = this.model.getCitasNoAsistidas();
+    private async render() {
+        const citasAsistidas = await this.model.getCitasNoAsistidas();
         this.view.render(citasAsistidas);
     }
 }

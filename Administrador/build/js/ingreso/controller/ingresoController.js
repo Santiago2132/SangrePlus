@@ -36,8 +36,8 @@ export default class IngresoController {
             });
         }
     };
-    authenticateUser = (nombre, password) => {
-        const usuario = this.ingresoModel.obtenerUsuario(nombre, password);
+    authenticateUser = async (nombre, password) => {
+        const usuario = await this.ingresoModel.obtenerUsuario(nombre, password);
         if (usuario) {
             this.usuario = usuario; // Guarda el usuario autenticado
             console.log(`Bienvenido ${usuario.tipo === 'admin' ? 'administrador' : 'agente'}: ${usuario.nombre}`);

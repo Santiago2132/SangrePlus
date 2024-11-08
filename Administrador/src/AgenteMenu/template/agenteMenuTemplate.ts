@@ -16,9 +16,9 @@ export default class AgenteMenuTemplate {
                         <thead>
                             <tr>
                                 <th>Orden de Turnoss</th>
-                                <th>ID Turno</th>
+                                <th>Turno</th>
                                 <th>ID Cita</th>
-                                <th>Hora</th>
+                                <th>Modulo</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>

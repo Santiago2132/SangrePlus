@@ -14,17 +14,17 @@ export default class AgenteMenuController {
         this.agenteMenuView.init();
         this.render();
     }
-    render() {
-        const turnosConCitas = this.agenteMenuModel.getTurnosConCitas();
+    async render() {
+        const turnosConCitas = await this.agenteMenuModel.getTurnosConCitas();
         this.agenteMenuView.render(turnosConCitas);
     }
-    onOrdenChange = (nuevoOrden) => {
-        this.agenteMenuModel.setTurnosConCitas(nuevoOrden);
+    onOrdenChange = async (nuevoOrden) => {
+        await this.agenteMenuModel.setTurnosConCitas(nuevoOrden);
         this.render();
     };
-    onEliminarTurno = (id_turno) => {
+    onEliminarTurno = async (id_turno) => {
         console.log("Eliminando turno con ID:", id_turno);
-        this.agenteMenuModel.eliminarTurno(id_turno); // Llamar al método de eliminación en el modelo
+        await this.agenteMenuModel.eliminarTurno(id_turno); // Llamar al método de eliminación en el modelo
         this.render(); // Actualizar la vista después de la eliminación
     };
 }

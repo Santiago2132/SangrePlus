@@ -18,19 +18,19 @@ export default class AgenteMenuController {
         this.render();
     }
 
-    public render() {
-        const turnosConCitas = this.agenteMenuModel.getTurnosConCitas();
+    public async render() {
+        const turnosConCitas = await this.agenteMenuModel.getTurnosConCitas();
         this.agenteMenuView.render(turnosConCitas);
     }
 
-    private onOrdenChange = (nuevoOrden: any[]): void => {
-        this.agenteMenuModel.setTurnosConCitas(nuevoOrden);
+    private onOrdenChange =async (nuevoOrden: any[]): Promise<void> => {
+        await this.agenteMenuModel.setTurnosConCitas(nuevoOrden);
         this.render();
     }
 
-    private onEliminarTurno = (id_turno: number): void => {
+    private  onEliminarTurno = async(id_turno: number): Promise<void> => {
         console.log("Eliminando turno con ID:", id_turno);
-        this.agenteMenuModel.eliminarTurno(id_turno);  // Llamar al método de eliminación en el modelo
+         await this.agenteMenuModel.eliminarTurno(id_turno);  // Llamar al método de eliminación en el modelo
         this.render();  // Actualizar la vista después de la eliminación
     }
 }

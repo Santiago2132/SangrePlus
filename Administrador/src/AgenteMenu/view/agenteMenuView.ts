@@ -31,10 +31,10 @@ export default class AgenteMenuView {
 
         let tableRows = turnosConCitas.map((turno, index) => `
             <tr data-index="${index}">
-                <td>${turno.numero}</td>
+                <td>${turno.id_turno}</td>
                 <td>${turno.turno}</td>
-                <td>${turno.cita ? turno.cita.id : "N/A"}</td>
-                <td>${turno.cita ? turno.cita.hora : "N/A"}</td>
+                <td>${turno.cita_id ? turno.cita_id : "N/A"}</td>
+                <td>${turno.cita_id ? turno.modulo : "N/A"}</td>
                 <td>
                     <button class="turno-btn subir" data-index="${index}">Arriba</button>
                     <button class="turno-btn bajar" data-index="${index}">Abajo</button>

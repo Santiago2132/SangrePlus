@@ -31,12 +31,43 @@ export class IngresoModel {
     }
 
     // Método para verificar credenciales
-    public verificarCredenciales(nombre: string, password: string): boolean {
-        return this.usuarios.some(user => user.nombre === nombre && user.password === password);
+    public async verificarCredenciales(nombre: string, password: string): Promise<boolean> {
+        if(await this.obtenerUsuario(nombre,password)){
+            return true
+        }else{
+            return false
+        }
     }
 
     // Método para obtener un usuario
-    public obtenerUsuario(nombre: string, password: string): User | null {
-        return this.usuarios.find(user => user.nombre === nombre && user.password === password) || null;
+    public async obtenerUsuario(nombre: string, password: string): Promise<User | null> {
+        return await this.validarLogin(nombre,password)
+    }
+
+
+    public async validarLogin(usuario: string, contrasena:string): Promise<User> {
+        const response = await fetch(`http://localhost:3000/parcial/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nombre: usuario,contrasena:contrasena  }),
+        })
+            if (!response.ok) {
+                console.log('error en el server')
+            }
+            const mensaje= await response.json()
+            console.log(mensaje.data)
+            return this.getInterface(mensaje.data)
+
+    }
+
+    public getInterface(data:any): User{
+        const dataa = {
+            nombre: data._nombre,
+            password: data._contrasena,
+            tipo: data._tipo,
+        };
+        return dataa
     }
 }

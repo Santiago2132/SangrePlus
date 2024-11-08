@@ -12,8 +12,8 @@ export default class cNoAsistidasController {
         console.log("Citas asistidas Controller iniciado");
         this.render();
     }
-    render() {
-        const citasAsistidas = this.model.getCitasNoAsistidas();
+    async render() {
+        const citasAsistidas = await this.model.getCitasNoAsistidas();
         this.view.render(citasAsistidas);
     }
 }
